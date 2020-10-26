@@ -1,0 +1,23 @@
+version: '3.2'
+services:
+  redis:
+    image: redis:6.0-alpine
+    env_file:
+      - external-services.env
+      - external-services.local.env
+    volumes:
+      - ./volume/config/redis:/usr/local/etc/redis
+      - ./volume/data/redis:/data
+    command:
+      - sh
+      - -c
+      - |
+        if [ -z "$$REDIS_CONFIG_PATH" ];
+        then redis-server;
+        else redis-server $$REDIS_CONFIG_PATH;
+        fi
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - external-services-network
