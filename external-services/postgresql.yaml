@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  postgresql:
+    image: byzanteam/postgres-zhparser-alpine:latest
+    env_file:
+      - external-services.env
+      - external-services.local.env
+    volumes:
+      - ./volume/config/postgresql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./volume/config/postgresql:/usr/local/etc/postgresql
+      - ./volume/data/postgresql:/var/lib/postgresql
+    entrypoint: []
+    command:
+      - sh
+      - -c
+      - |
+        if [ -z "$$POSTGRES_CONFIG_PATH" ]; then
+          docker-entrypoint.sh postgres
+        else
+          chown postgres $$POSTGRES_CONFIG_PATH
+          docker-entrypoint.sh postgres -c config_file=$$POSTGRES_CONFIG_PATH
+        fi
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    networks:
+      - external-services-network
