@@ -84,7 +84,7 @@ airbasePushBufferSize: 1
 # PostgreSQL
 postgresqlUser: postgres
 postgresqlPassword: postgres
-postgresqlIP: 127.0.0.1
+postgresqlIP: 10.0.0.18
 postgresqlPort: 5432
 postgresqlAirbaseDatabase: airbase_prod
 postgresqlAirbasePoolSize: 30
@@ -92,7 +92,7 @@ postgresqlEventStoreDatabase: eventstore_prod
 postgresqlEventStorePoolSize: 60
 
 # Redis
-redisIP: 127.0.0.1
+redisIP: 10.0.0.18
 redisPort: 6379
 redisPoolSize: 5
 
@@ -104,9 +104,9 @@ minioHost: oss.beta.jet.work
 minioPort: 80
 
 # Sonic
-sonicGenericIP: 127.0.0.1
+sonicGenericIP: 10.0.0.18
 sonicGenericPort: 1491
 sonicGenericPassword: SecretPassword
-sonicUsersNamesIP: 127.0.0.1
+sonicUsersNamesIP: 10.0.0.18
 sonicUsersNamesPort: 1492
 sonicUsersNamesPassword: SecretPassword
