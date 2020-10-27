@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  minio_init:
+    image: minio/mc:RELEASE.2020-10-03T02-54-56Z
+    working_dir: /usr/local/etc/minio
+    volumes:
+      - ./volume/config/minio/config:/usr/local/etc/minio
+    env_file:
+      - external-services.env
+      - external-services.local.env
+    entrypoint: /bin/sh
+    command: ./init.sh
+    networks:
+      - external-services-network

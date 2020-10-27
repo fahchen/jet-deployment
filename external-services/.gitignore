@@ -2,3 +2,4 @@ external-services.local.env
 /volume/data/*
 /volume/config/redis/redis.conf
 /volume/config/postgresql/postgresql.conf
+/volume/config/minio/redis/redis.conf
