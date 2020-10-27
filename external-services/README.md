@@ -37,3 +37,8 @@ docker-compose -f docker-compose.yaml -f redis.yaml -f sonic.yaml -f postgresql.
 ```bash
 docker-compose -f docker-compose.yaml -f minio_init.yaml run minio_init
 ```
+
+3. upload image to trigger event
+```bash
+mc cp /path/to/image.jpg minio/jet-public/image.jpg --attr "Versions=thumbnail;Purpose=project_attachment"
+```
