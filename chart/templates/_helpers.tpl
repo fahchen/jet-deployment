@@ -51,12 +51,21 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use
+Return the proper Airbase image name
 */}}
-{{- define "jet-chart.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "jet-chart.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+{{- define "jet-chart.airbase-image" }}
+{{- $registryName := .Values.airbase.image.registry -}}
+{{- $repositoryName := .Values.airbase.image.repository -}}
+{{- $tag := .Values.airbase.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end }}
+
+{{/*
+Return the proper Aircrew image name
+*/}}
+{{- define "jet-chart.aircrew-image" }}
+{{- $registryName := .Values.aircrew.image.registry -}}
+{{- $repositoryName := .Values.aircrew.image.repository -}}
+{{- $tag := .Values.aircrew.image.tag | toString -}}
+{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end }}

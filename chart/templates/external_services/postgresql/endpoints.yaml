@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-postgresql
+subsets:
+  - addresses:
+      - ip: {{ .Values.postgresqlIP}}
+    ports:
+      - port: {{ .Values.postgresqlPort }}

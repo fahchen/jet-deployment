@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-airbase
+  labels:
+    {{- include "jet-chart.labels" . | nindent 4 }}
+data:
+  TZ: Asia/Shanghai
+  LANG: en_US.UTF-8
+  LANGUAGE: en_US.UTF-8
+  LC_ALL: en_US.UTF-8
+
+  MIX_ENV: prod
+  ENABLE_SSL: {{ .Values.airbaseEnableSSL | quote }}
+  JET_SERVER_NAME: {{ .Values.airbaseServerName }}
+  PORT: "4000"
+  LOCALE_DOMAIN: {{ .Values.airbaseLocaleDomain }}
+  JET_DEPLOYMENT_ID: {{ .Values.airbaseDeploymentID | default (.Release.Name) }}
+  MIX_LOGGER_LEVEL: {{ .Values.airbaseLoggerLevel }}
+
+  JET_ARC_STORAGE: ""
+  JET_ARC_PRIVATE_BUCKET: {{ .Values.airbaseOSSPrivateBucket }}
+  JET_ARC_PUBLIC_BUCKET: {{ .Values.airbaseOSSPublicBucket }}
+
+  JET_ALIXIR_SMS_ACCESS_KEY_ID: {{ .Values.airbaseAlixirSMSAccessKeyID }}
+  JET_ALIXIR_SMS_ACCESS_SECRET: {{ .Values.airbaseAlixirSMSAccessSecret }}
+  JET_ALIXIR_SMS_ACCESS_VERIFICATION_CODE_SIGN_NAME: {{ .Values.airbaseAlixirSMSAccessVerificationCodeSignName }}
+  JET_ALIXIR_SMS_ACCESS_VERIFICATION_CODE_TEMPLATE_CODE: {{ .Values.airbaseAlixirSMSAccessVerificationCodeTemplateCode }}
+
+  JET_SENTRY_DSN: {{ .Values.airbaseSentryDsn | quote }}
+  JET_RELEASE: {{ .Values.airbaseSentryRelease | quote }}
+
+  WECHAT_APP_ID: {{ .Values.airbaseWechatAppID | quote }}
+  WECHAT_SECRET: {{ .Values.airbaseWechatSecret | quote }}
+  WECHAT_AUDIT_PHONE: {{ .Values.airbasewechatAuditPhone | quote }}
+  WECHAT_AUDIT_CODE: {{ .Values.airbaseWechatAuditCode | quote }}
+
+  JET_AIRBASE_CACHE_CONCURRENCY_LIMIT: {{ .Values.airbaseCacheConcurrencyLimit | quote }}
+  JET_AIRBASE_CACHE_BUFFER_SIZE: {{ .Values.airbaseCacheBufferSize | quote }}
+  JET_AIRBASE_PUSH_CONCURRENCY_LIMIT: {{ .Values.airbasePushConcurrencyLimit | quote }}
+  JET_AIRBASE_PUSH_BUFFER_SIZE: {{ .Values.airbasePushBufferSize | quote }}

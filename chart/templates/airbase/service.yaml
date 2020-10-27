@@ -1,15 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "jet-chart.fullname" . }}
+  name: {{ include "jet-chart.fullname" . }}-airbase
   labels:
     {{- include "jet-chart.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: ClusterIP
   ports:
-    - port: {{ .Values.service.port }}
+    - port: 4000
       targetPort: http
       protocol: TCP
       name: http
   selector:
     {{- include "jet-chart.selectorLabels" . | nindent 4 }}
+    app: {{ template "jet-chart.fullname" . }}-airbase

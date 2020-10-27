@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-postgresql
+  labels:
+    {{- include "jet-chart.labels" . | nindent 4 }}
+spec:
+  ports:
+    - port: 5432
+      targetPort: {{ .Values.postgresqlPort }}
