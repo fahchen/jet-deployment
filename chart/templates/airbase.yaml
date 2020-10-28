@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-airbase
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`jet.localhost`) && PathPrefix(`/api`, `subscriptions`, `/explorer`, `/app_store/api`, `/app_store/explorer`, `/oss`)
+      kind: Rule
+      services:
+        - name: {{ include "jet-chart.fullname" . }}-airbase
+          port: 80
