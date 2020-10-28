@@ -4,6 +4,7 @@ metadata:
   name: {{ include "jet-chart.fullname" . }}-airbase
   labels:
     {{- include "jet-chart.labels" . | nindent 4 }}
+    app: {{ include "jet-chart.fullname" . }}-airbase
 spec:
   replicas: 1
   selector:
