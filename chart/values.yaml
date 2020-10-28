@@ -54,7 +54,7 @@ nodeSelector: {}
 
 # [Airbase]
 airbaseEnableSSL: false
-airbaseServerName: beta.jet.work
+airbaseServerName: jet.localhost
 airbaseDeploymentID:
 airbaseLocaleDomain: default
 airbaseLoggerLevel: info
@@ -100,7 +100,7 @@ redisPoolSize: 5
 minioAccessKey: minio
 minioSecretKey: minio123
 minioScheme: http://
-minioHost: oss.beta.jet.work
+minioHost: oss.jet.localhost
 minioPort: 80
 minioServiceIP: 10.0.0.18
 minioServicePort: 9090
@@ -115,10 +115,10 @@ sonicUsersNamesPassword: SecretPassword
 
 # [Aircrew]
 aircrewEnableSSL: false
-aircrewHost: beta.jet.work
+aircrewHost: jet.localhost
 aircrewAppName: Jet
 aircrewLocaleDomain: default
-aircrewAppAssetsHost: https://beta.jet.work/jet-public
+aircrewAppAssetsHost: https://oss.jet.localhost/jet-public
 
 aircrewSentryDsn: ""
 aircrewSentryRelease: beta
