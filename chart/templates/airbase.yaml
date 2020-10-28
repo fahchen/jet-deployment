@@ -6,17 +6,17 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`jet.localhost`) && Path(`/api`, `/subscriptions`, `/explorer`)
+    - match: Host(`{{ .Values.airbaseServerName }}`) && Path(`/api`, `/subscriptions`, `/explorer`)
       kind: Rule
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
-    - match: Host(`jet.localhost`) && Path(`/app_store/api`, `/app_store/explorer`)
+    - match: Host(`{{ .Values.airbaseServerName }}`) && Path(`/app_store/api`, `/app_store/explorer`)
       kind: Rule
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
-    - match: Host(`jet.localhost`) && PathPrefix(`/oss/`)
+    - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/oss/`)
       kind: Rule
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
