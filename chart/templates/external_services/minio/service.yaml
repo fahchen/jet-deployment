@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-minio
+  labels:
+    {{- include "jet-chart.labels" . | nindent 4 }}
+spec:
+  ports:
+    - port: 9090
+      targetPort: {{ .Values.minioServicePort }}

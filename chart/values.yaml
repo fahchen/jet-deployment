@@ -102,6 +102,8 @@ minioSecretKey: minio123
 minioScheme: http://
 minioHost: oss.beta.jet.work
 minioPort: 80
+minioServiceIP: 10.0.0.18
+minioServicePort: 9090
 
 # [Sonic]
 sonicGenericIP: 10.0.0.18
