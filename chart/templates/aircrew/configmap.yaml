@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-aircrew
+  labels:
+    {{- include "jet-chart.labels" . | nindent 4 }}
+data:
+  PROD: "true"
+  ENABLE_SSL: {{ .Values.aircrewEnableSSL | quote }}
+  HOST: {{ .Values.aircrewHost }}
+  APP: {{ .Values.aircrewAppName }}
+  LOCALE_DOMAIN: {{ .Values.aircrewLocaleDomain }}
+  APP_ASSETS_HOST: {{ .Values.aircrewAppAssetsHost }}
+
+  SENTRY_DSN: {{ .Values.aircrewSentryDsn | quote }}
+  SENTRY_RELEASE: {{ .Values.aircrewSentryRelease | quote }}
+
+  HOMEPAGE: {{ .Values.aircrewHomepage | quote }}
+  ICP_RECORD: {{ .Values.aircrewICPRecord | quote }}
+  ICP_RECORD_LINK: {{ .Values.aircrewICPRecordLink | quote }}
+  CYBER_SECURITY_RECORD: {{ .Values.aircrewCyberSecurityRecord | quote }}
+  CYBER_SECURITY_RECORD_LINK: {{ .Values.aircrewCyberSecurityRecordLink | quote }}

@@ -110,3 +110,25 @@ sonicGenericPassword: SecretPassword
 sonicUsersNamesIP: 10.0.0.18
 sonicUsersNamesPort: 1492
 sonicUsersNamesPassword: SecretPassword
+
+# [Aircrew]
+aircrewEnableSSL: false
+aircrewHost: beta.jet.work
+aircrewAppName: Jet
+aircrewLocaleDomain: default
+aircrewAppAssetsHost: https://beta.jet.work/jet-public
+
+aircrewSentryDsn: ""
+aircrewSentryRelease: beta
+
+## -- homepage --
+# 是否展示主页
+aircrewHomepage: false
+# ICP 备案文案
+aircrewICPRecord: ""
+# ICP 备案指向链接
+aircrewICPRecordLink: ""
+# 公安部备案文案
+aircrewCyberSecurityRecord: ""
+# 公安部备案指向链接
+aircrewCyberSecurityRecordLink: ""

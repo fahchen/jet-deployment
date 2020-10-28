@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-aircrew
+  labels:
+    {{- include "jet-chart.labels" . | nindent 4 }}
+    app: {{ include "jet-chart.fullname" . }}-aircrew
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "jet-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "jet-chart.selectorLabels" . | nindent 8 }}
+        app: {{ template "jet-chart.fullname" . }}-aircrew
+    spec:
+      {{- with .Values.aircrew.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}-aircrew
+          image: {{ include "jet-chart.aircrew-image" . }}
+          imagePullPolicy: {{ .Values.aircrew.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "jet-chart.fullname" . }}-aircrew
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.aircrew.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
