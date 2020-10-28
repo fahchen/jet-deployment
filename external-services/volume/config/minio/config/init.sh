@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-apk add gettext --quiet
-
 mc config host add minio http://minio:9090 $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
 
 setup_event() {
