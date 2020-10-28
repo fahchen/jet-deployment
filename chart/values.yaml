@@ -52,7 +52,7 @@ autoscaling:
 
 nodeSelector: {}
 
-# airbase config
+# [Airbase]
 airbaseEnableSSL: false
 airbaseServerName: beta.jet.work
 airbaseDeploymentID:
@@ -68,7 +68,7 @@ airbaseAlixirSMSAccessVerificationCodeSignName: 了了科技
 airbaseAlixirSMSAccessVerificationCodeTemplateCode: changeti
 
 airbaseSentryDsn: ""
-airbaseSentryRelease: production
+airbaseSentryRelease: beta
 
 airbaseWechatAppID: ""
 airbaseWechatSecret: ""
@@ -81,7 +81,7 @@ airbasePushConcurrencyLimit: 10
 airbasePushBufferSize: 1
 
 
-# PostgreSQL
+# [PostgreSQL]
 postgresqlUser: postgres
 postgresqlPassword: postgres
 postgresqlIP: 10.0.0.18
@@ -91,19 +91,19 @@ postgresqlAirbasePoolSize: 30
 postgresqlEventStoreDatabase: eventstore_prod
 postgresqlEventStorePoolSize: 60
 
-# Redis
+# [Redis]
 redisIP: 10.0.0.18
 redisPort: 6379
 redisPoolSize: 5
 
-# Minio
+# [Minio]
 minioAccessKey: minio
 minioSecretKey: minio123
 minioScheme: http://
 minioHost: oss.beta.jet.work
 minioPort: 80
 
-# Sonic
+# [Sonic]
 sonicGenericIP: 10.0.0.18
 sonicGenericPort: 1491
 sonicGenericPassword: SecretPassword
