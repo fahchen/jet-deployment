@@ -104,6 +104,8 @@ minioHost: oss.jet.localhost
 minioPort: 80
 minioServiceIP: 10.0.0.18
 minioServicePort: 9090
+minioredisIP: 10.0.0.18
+minioredisPort: 6389
 
 # [Sonic]
 sonicGenericIP: 10.0.0.18
@@ -134,3 +136,13 @@ aircrewICPRecordLink: ""
 aircrewCyberSecurityRecord: ""
 # 公安部备案指向链接
 aircrewCyberSecurityRecordLink: ""
+
+
+# Dependencies
+
+# [Scixir]
+scixir: {}
+  # SET IT
+  # minioRedisUrl: redis://{{ include "jet-chart.fullname" . }}-minioredis:6379/0
+  # SET IT
+  # minioHost: {{ include "jet-chart.fullname" . }}-minio
