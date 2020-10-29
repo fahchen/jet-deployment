@@ -59,8 +59,8 @@ airbaseDeploymentID:
 airbaseLocaleDomain: default
 airbaseLoggerLevel: info
 
-airbaseOSSPrivateBucket: jet-public
-airbaseOSSPublicBucket: jet
+airbaseOSSPrivateBucket: jet
+airbaseOSSPublicBucket: jet-public
 
 airbaseAlixirSMSAccessKeyID: abc
 airbaseAlixirSMSAccessSecret: overwriteit
