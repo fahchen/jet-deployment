@@ -9,21 +9,29 @@ spec:
   routes:
     - match: Host(`{{ .Values.airbaseServerName }}`) && Path(`/api`, `/explorer`)
       kind: Rule
+      middlewares:
+        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
     - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/subscriptions/`)
       kind: Rule
+      middlewares:
+        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
     - match: Host(`{{ .Values.airbaseServerName }}`) && Path(`/app_store/api`, `/app_store/explorer`)
       kind: Rule
+      middlewares:
+        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
     - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/oss/`)
       kind: Rule
+      middlewares:
+        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
