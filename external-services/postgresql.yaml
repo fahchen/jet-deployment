@@ -8,7 +8,7 @@ services:
     volumes:
       - ./volume/config/postgresql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - ./volume/config/postgresql:/usr/local/etc/postgresql
-      - ./volume/data/postgresql:/var/lib/postgresql
+      - ./volume/data/postgresql/data:/var/lib/postgresql/data
     entrypoint: []
     command:
       - sh
