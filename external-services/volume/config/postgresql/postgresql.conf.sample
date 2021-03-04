@@ -659,3 +659,8 @@ listen_addresses = '*'
 #------------------------------------------------------------------------------
 
 # Add settings for extensions here
+
+# zhparser
+# https://github.com/amutu/zhparser
+zhparser.punctuation_ignore = on
+zhparser.multi_short = on
