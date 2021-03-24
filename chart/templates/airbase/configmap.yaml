@@ -39,3 +39,6 @@ data:
   JET_AIRBASE_CACHE_BUFFER_SIZE: {{ .Values.airbaseCacheBufferSize | quote }}
   JET_AIRBASE_PUSH_CONCURRENCY_LIMIT: {{ .Values.airbasePushConcurrencyLimit | quote }}
   JET_AIRBASE_PUSH_BUFFER_SIZE: {{ .Values.airbasePushBufferSize | quote }}
+
+  OPS_LIVE_DASHBOARD_USERNAME: {{ .Values.airbaseOpsLiveDashboardUsername | quote }}
+  OPS_LIVE_DASHBOARD_PASSWORD: {{ .Values.airbaseOpsLiveDashboardPassword | quote }}
