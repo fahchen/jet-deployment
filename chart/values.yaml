@@ -80,6 +80,9 @@ airbaseCacheBufferSize: 1
 airbasePushConcurrencyLimit: 10
 airbasePushBufferSize: 1
 
+airbaseOpsLiveDashboardUsername: ""
+airbaseOpsLiveDashboardPassword: ""
+
 
 # [PostgreSQL]
 postgresqlUser: postgres

@@ -7,14 +7,14 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`{{ .Values.airbaseServerName }}`) && Path(`/api`, `/explorer`)
+    - match: Host(`{{ .Values.airbaseServerName }}`) && Path(`/api`, `/explorer`, `/ops`)
       kind: Rule
       middlewares:
         - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
-    - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/subscriptions/`)
+    - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/subscriptions/`, `/live/`)
       kind: Rule
       middlewares:
         - name: {{ include "jet-chart.fullname" . }}-compress
