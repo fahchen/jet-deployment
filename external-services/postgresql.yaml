@@ -14,12 +14,8 @@ services:
       - sh
       - -c
       - |
-        if [ -z "$$POSTGRES_CONFIG_PATH" ]; then
-          docker-entrypoint.sh postgres
-        else
-          chown postgres $$POSTGRES_CONFIG_PATH
-          docker-entrypoint.sh postgres -c config_file=$$POSTGRES_CONFIG_PATH
-        fi
+        chown postgres $$POSTGRES_CONFIG_PATH
+        docker-entrypoint.sh postgres -c config_file=$$POSTGRES_CONFIG_PATH
     restart: unless-stopped
     ports:
       - 5432:5432
