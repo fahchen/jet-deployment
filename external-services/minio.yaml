@@ -13,10 +13,7 @@ services:
       - sh
       - -c
       - |
-        if [ -z "$$MINIO_REDIS_CONFIG_PATH" ];
-        then redis-server;
-        else redis-server $$MINIO_REDIS_CONFIG_PATH;
-        fi
+        redis-server $$MINIO_REDIS_CONFIG_PATH
     restart: unless-stopped
     expose:
       - 6379

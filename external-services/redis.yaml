@@ -12,10 +12,7 @@ services:
       - sh
       - -c
       - |
-        if [ -z "$$REDIS_CONFIG_PATH" ];
-        then redis-server;
-        else redis-server $$REDIS_CONFIG_PATH;
-        fi
+        redis-server $$REDIS_CONFIG_PATH
     restart: unless-stopped
     ports:
       - "6379:6379"
