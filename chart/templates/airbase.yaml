@@ -35,7 +35,7 @@ spec:
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
-    - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/ops/`)
+    - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/ops`)
       kind: Rule
       middlewares:
         - name: {{ include "jet-chart.fullname" . }}-compress
