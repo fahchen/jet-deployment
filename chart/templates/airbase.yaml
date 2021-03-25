@@ -14,7 +14,7 @@ spec:
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
-    - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/subscriptions/`, `/live/`, `/ops/`)
+    - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/subscriptions/`, `/live/`)
       kind: Rule
       middlewares:
         - name: {{ include "jet-chart.fullname" . }}-compress
@@ -29,6 +29,13 @@ spec:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
     - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/oss/`)
+      kind: Rule
+      middlewares:
+        - name: {{ include "jet-chart.fullname" . }}-compress
+      services:
+        - name: {{ include "jet-chart.fullname" . }}-airbase
+          port: 80
+    - match: Host(`{{ .Values.airbaseServerName }}`) && PathPrefix(`/ops/`)
       kind: Rule
       middlewares:
         - name: {{ include "jet-chart.fullname" . }}-compress
