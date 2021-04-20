@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-RELEASE ?= local
+RELEASE ?= jet
 
 .PHONY: help install uninstall airbase rollout-airbase
 
