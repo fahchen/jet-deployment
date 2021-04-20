@@ -1,9 +1,9 @@
 dependencies:
 - name: traefik
   repository: https://helm.traefik.io/traefik
-  version: 9.7.0
+  version: 9.18.2
 - name: scixir
   repository: file://./dependencies/scixir
   version: 0.1.0
-digest: sha256:2d0ef3a57f2f2766ff7c5a3fdeca337737ebce9d2744519228c5db0def6e31c9
-generated: "2020-10-27T22:20:48.612827+08:00"
+digest: sha256:bba87b36035dd125e6beef62be83ba9afc86d175326851ae1312f7a45fed058a
+generated: "2021-04-20T11:45:21.82166+08:00"

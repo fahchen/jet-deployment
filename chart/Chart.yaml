@@ -24,7 +24,7 @@ appVersion: 1.16.0
 
 dependencies:
   - name: traefik
-    version: 9.7.0
+    version: 9.18.2
     repository: https://helm.traefik.io/traefik
   - name: scixir
     version: 0.1.0
