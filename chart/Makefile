@@ -4,28 +4,28 @@ RELEASE ?= local
 
 .PHONY: help install uninstall airbase rollout-airbase
 
-help: echo-version ## List commands
+help: echo-release ## List commands
 	@awk 'BEGIN {FS = ":.*##"; printf ""} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-install: echo-version ## Install the release
+install: echo-release ## Install the release
 	@helm install -f values.local.yaml $(RELEASE) ./
 
-upgrade: echo-version ## Upgrade the relase
+upgrade: echo-release ## Upgrade the relase
 	@helm upgrade -f values.local.yaml $(RELEASE) ./
 
-uninstall: echo-version ## Uninstall current release
+uninstall: echo-release ## Uninstall current release
 	@helm uninstall $(RELEASE)
 
-airbase: echo-version ## Enter the runnig airbase container
+airbase: echo-release ## Enter the runnig airbase container
 	# Entering airbase...
 	@kubectl exec -it `kubectl get pods --selector "app=$(RELEASE)-jet-chart-airbase" --output=name` -- sh
 
-rollout-airbase: echo-version ## Restart Airbase
+rollout-airbase: echo-release ## Restart Airbase
 	@kubectl rollout restart deploy/$(RELEASE)-jet-chart-airbase
 
-dryrun: echo-version
+dryrun: echo-release
 	@helm install -f values.local.yaml --dry-run $(RELEASE) ./
 
-echo-version:
+echo-release:
 	# ReleaseName: `$(RELEASE)`
 	# ----------------------
