@@ -11,7 +11,7 @@ data:
   LC_ALL: en_US.UTF-8
 
   MIX_ENV: prod
-  ENABLE_SSL: {{ .Values.airbaseEnableSSL | quote }}
+  ENABLE_SSL: {{ .Values.jetTLSSecret | empty | not | quote }}
   JET_SERVER_NAME: {{ .Values.airbaseServerName }}
   PORT: "4000"
   LOCALE_DOMAIN: {{ .Values.airbaseLocaleDomain }}

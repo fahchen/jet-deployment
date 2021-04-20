@@ -6,7 +6,7 @@ metadata:
     {{- include "jet-chart.labels" . | nindent 4 }}
 data:
   PROD: "true"
-  ENABLE_SSL: {{ .Values.aircrewEnableSSL | quote }}
+  ENABLE_SSL: {{ .Values.jetTLSSecret | empty | not | quote }}
   HOST: {{ .Values.aircrewHost }}
   APP: {{ .Values.aircrewAppName }}
   LOCALE_DOMAIN: {{ .Values.aircrewLocaleDomain }}
