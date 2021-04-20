@@ -50,3 +50,9 @@ scixir:
   minioRedisUrl: redis://release-jet-chart-minioredis:6379/0
   minioHost: release-jet-chart-minio
 ```
+
+#### Commands
+```bash
+# install with name of `workflow`
+make install RELEASE=workflow
+```
