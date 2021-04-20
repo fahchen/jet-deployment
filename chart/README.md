@@ -1,6 +1,16 @@
 ## Usage
 
-#### create imagePullSecrets
+### Prerequisites
+- Helm v3 [installed](https://helm.sh/docs/using_helm/#installing-helm)
+- install `traefik`
+
+```bash
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm install traefik traefik/traefik
+````
+
+### create imagePullSecrets
 ```bash
 kubectl create secret docker-registry jetregistry \
           --docker-server=$DOCKER_REGISTRY \
@@ -8,7 +18,7 @@ kubectl create secret docker-registry jetregistry \
           --docker-password=$DOCKER_PASSWORD
 ```
 
-#### Prepare config file
+### Prepare config file
 ```bash
 touch values.local.yaml
 ```
@@ -49,4 +59,29 @@ traefik:
 scixir:
   minioRedisUrl: redis://release-jet-chart-minioredis:6379/0
   minioHost: release-jet-chart-minio
+```
+
+## Commands
+```bash
+# install with name of `workflow`
+make install RELEASE=workflow
+```
+
+## HowTo
+
+### Setup TLS
+```bash
+# create secrets
+kubectl create secret tls minio-tls-secret \
+  --cert=oss.workflow.jet.work.pem \
+  --key=oss.workflow.jet.work.key
+
+kubectl create secret tls jet-tls-secret \
+  --cert=workflow.jet.work.pem \
+  --key=workflow.jet.work.key
+```
+```yaml
+# set values in `values.local.yaml`
+jetTLSSecret: jet-tls-secret
+minioTLSSecret: minio-tls-secret
 ```

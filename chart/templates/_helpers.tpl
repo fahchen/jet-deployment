@@ -69,3 +69,23 @@ Return the proper Aircrew image name
 {{- $tag := .Values.aircrew.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end }}
+
+{{/*
+Return the proper tls config for jet
+*/}}
+{{- define "jet-chart.jet-tls-options" }}
+{{- if .Values.jetTLSSecret | empty | not }}
+tls:
+  secretName: {{ .Values.jetTLSSecret }}
+{{- end }}
+{{- end }}
+
+{{/*
+Return the proper tls config for minio
+*/}}
+{{- define "jet-chart.minio-tls-options" }}
+{{- if .Values.jetTLSSecret | empty | not }}
+tls:
+  secretName: {{ .Values.minioTLSSecret }}
+{{- end }}
+{{- end }}
