@@ -52,6 +52,9 @@ autoscaling:
 
 nodeSelector: {}
 
+jetTLSSecret:
+minioTLSSecret:
+
 # [Airbase]
 airbaseEnableSSL: false
 airbaseServerName: jet.localhost

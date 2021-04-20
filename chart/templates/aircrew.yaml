@@ -14,3 +14,4 @@ spec:
       services:
         - name: {{ include "jet-chart.fullname" . }}-aircrew
           port: 80
+  {{- include "jet-chart.jet-tls-options" . | nindent 2 }}
