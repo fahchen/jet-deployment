@@ -42,4 +42,11 @@ spec:
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
+    - match: Host(`{{ .Values.aircrewHost }}`)
+      kind: Rule
+      middlewares:
+        - name: {{ include "jet-chart.fullname" . }}-compress
+      services:
+        - name: {{ include "jet-chart.fullname" . }}-aircrew
+          port: 80
   {{- include "jet-chart.jet-tls-options" . | nindent 2 }}
