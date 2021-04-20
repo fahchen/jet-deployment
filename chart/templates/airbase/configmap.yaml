@@ -12,7 +12,7 @@ data:
 
   MIX_ENV: prod
   ENABLE_SSL: {{ .Values.jetTLSSecret | empty | not | quote }}
-  JET_SERVER_NAME: {{ .Values.airbaseServerName }}
+  JET_SERVER_NAME: {{ .Values.jetHost }}
   PORT: "4000"
   LOCALE_DOMAIN: {{ .Values.airbaseLocaleDomain }}
   JET_DEPLOYMENT_ID: {{ .Values.airbaseDeploymentID | default (.Release.Name) }}

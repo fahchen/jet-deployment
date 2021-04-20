@@ -52,11 +52,12 @@ autoscaling:
 
 nodeSelector: {}
 
+# [Jet]
+jetHost: jet.localhost
 jetTLSSecret:
 minioTLSSecret:
 
 # [Airbase]
-airbaseServerName: jet.localhost
 airbaseDeploymentID:
 airbaseLocaleDomain: default
 airbaseLoggerLevel: info
@@ -121,7 +122,6 @@ sonicUsersNamesPort: 1492
 sonicUsersNamesPassword: SecretPassword
 
 # [Aircrew]
-aircrewHost: jet.localhost
 aircrewAppName: Jet
 aircrewLocaleDomain: default
 aircrewAppAssetsHost: https://oss.jet.localhost/jet-public

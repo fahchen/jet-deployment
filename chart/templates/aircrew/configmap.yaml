@@ -7,7 +7,7 @@ metadata:
 data:
   PROD: "true"
   ENABLE_SSL: {{ .Values.jetTLSSecret | empty | not | quote }}
-  HOST: {{ .Values.aircrewHost }}
+  HOST: {{ .Values.jetHost }}
   APP: {{ .Values.aircrewAppName }}
   LOCALE_DOMAIN: {{ .Values.aircrewLocaleDomain }}
   APP_ASSETS_HOST: {{ .Values.aircrewAppAssetsHost }}
