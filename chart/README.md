@@ -1,5 +1,15 @@
 ## Usage
 
+#### Prerequisites
+- Helm v3 [installed](https://helm.sh/docs/using_helm/#installing-helm)
+- install `traefik`
+
+```bash
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm install traefik traefik/traefik
+````
+
 #### create imagePullSecrets
 ```bash
 kubectl create secret docker-registry jetregistry \
