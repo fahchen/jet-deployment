@@ -7,7 +7,21 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`{{ .Values.minioHost }}`)
+    - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/minio/`)
+      kind: Rule
+      middlewares:
+        - name: {{ include "jet-chart.fullname" . }}-compress
+      services:
+        - name: {{ include "jet-chart.fullname" . }}-minio
+          port: 9090
+    - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/{{ .Values.airbaseOSSPrivateBucket }}/`)
+      kind: Rule
+      middlewares:
+        - name: {{ include "jet-chart.fullname" . }}-compress
+      services:
+        - name: {{ include "jet-chart.fullname" . }}-minio
+          port: 9090
+    - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/{{ .Values.airbaseOSSPublicBucket }}/`)
       kind: Rule
       middlewares:
         - name: {{ include "jet-chart.fullname" . }}-compress
