@@ -62,8 +62,8 @@ airbaseDeploymentID:
 airbaseLocaleDomain: default
 airbaseLoggerLevel: info
 
-airbaseOSSPrivateBucket: jet
-airbaseOSSPublicBucket: jet-public
+airbaseOSSPrivateBucket: minio-private
+airbaseOSSPublicBucket: minio-public
 
 airbaseAlixirSMSAccessKeyID: abc
 airbaseAlixirSMSAccessSecret: overwriteit
@@ -124,7 +124,7 @@ sonicUsersNamesPassword: SecretPassword
 # [Aircrew]
 aircrewAppName: Jet
 aircrewLocaleDomain: default
-aircrewAppAssetsHost: https://oss.jet.localhost/jet-public
+aircrewAppAssetsHost: https://oss.jet.localhost/minio-public
 
 aircrewSentryDsn: ""
 aircrewSentryRelease: beta
