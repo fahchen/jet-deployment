@@ -10,7 +10,7 @@ make up
 
 ```bash
 cp volume/config/redis/redis.sample.conf volume/config/redis/redis.conf
-cp volume/config/postgresql/postgresql.conf.sample volume/config/postgresql/postgresql.conf
+cp volume/config/postgresql/postgresql.sample.conf volume/config/postgresql/postgresql.conf
 cp volume/config/minio/redis/redis.sample.conf volume/config/minio/redis/redis.conf
 ```
 
