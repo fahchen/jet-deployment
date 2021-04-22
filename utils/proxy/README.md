@@ -14,5 +14,5 @@ sudo update-alternatives --config editor
 visudo
 
 # add below
-# Defaults env_keep = "http_proxy https_proxy all_proxy no_proxy"
+Defaults env_keep="http_proxy https_proxy all_proxy no_proxy"
 ```
