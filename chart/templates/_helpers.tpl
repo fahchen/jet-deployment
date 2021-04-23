@@ -97,7 +97,7 @@ Return the common middlewares for jet ingress-routes
 middlewares:
   - name: {{ include "jet-chart.fullname" . }}-compress
 {{- if .Values.jetTLSSecret | empty | not }}
-  - name: {{ include "jet-chart.fullname" . }}-redis-to-https
+  - name: {{ include "jet-chart.fullname" . }}-redirect-to-https
 {{- end }}
 {{- end }}
 
@@ -108,6 +108,6 @@ Return the common middlewares for minio ingress-routes
 middlewares:
   - name: {{ include "jet-chart.fullname" . }}-compress
 {{- if .Values.minioTLSSecret | empty | not }}
-  - name: {{ include "jet-chart.fullname" . }}-redis-to-https
+  - name: {{ include "jet-chart.fullname" . }}-redirect-to-https
 {{- end }}
 {{- end }}
