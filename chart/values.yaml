@@ -55,7 +55,6 @@ nodeSelector: {}
 # [Jet]
 jetHost: jet.localhost
 jetTLSSecret:
-minioTLSSecret:
 
 # [Airbase]
 airbaseDeploymentID:
@@ -107,6 +106,7 @@ minioAccessKey: minio
 minioSecretKey: minio123
 minioScheme: http://
 minioHost: oss.jet.localhost
+minioTLSSecret:
 minioPort: 80
 minioServiceIP: 10.0.0.18
 minioServicePort: 9090
