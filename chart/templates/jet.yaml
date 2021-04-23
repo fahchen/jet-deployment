@@ -9,44 +9,38 @@ spec:
   routes:
     - match: Host(`{{ .Values.jetHost }}`) && Path(`/api`, `/explorer`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
+      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
     - match: Host(`{{ .Values.jetHost }}`) && PathPrefix(`/subscriptions/`, `/live/`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
+      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
     - match: Host(`{{ .Values.jetHost }}`) && Path(`/app_store/api`, `/app_store/explorer`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
+      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
     - match: Host(`{{ .Values.jetHost }}`) && PathPrefix(`/oss/`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
+      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
     - match: Host(`{{ .Values.jetHost }}`) && PathPrefix(`/ops/`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-airbase
           port: 80
+      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
     - match: Host(`{{ .Values.jetHost }}`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-aircrew
           port: 80
+      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
   {{- include "jet-chart.jet-tls-options" . | nindent 2 }}

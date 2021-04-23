@@ -46,16 +46,6 @@ aircrew:
       - name: jetregistry
     pullPolicy: IfNotPresent
 
-traefik:
-  service:
-    externalIPs:
-      # in a vpc
-      - 10.0.0.18
-  ports:
-    web:
-      # redirect http to https
-      redirectTo: websecure
-
 scixir:
   minioRedisUrl: redis://release-jet-chart-minioredis:6379/0
   minioHost: release-jet-chart-minio

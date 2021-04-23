@@ -9,23 +9,20 @@ spec:
   routes:
     - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/minio/`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-minio
           port: 9090
+      {{- include "jet-chart.minio-ingress-route-middlewares" . | nindent 6 }}
     - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/{{ .Values.airbaseOSSPrivateBucket }}/`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-minio
           port: 9090
+      {{- include "jet-chart.minio-ingress-route-middlewares" . | nindent 6 }}
     - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/{{ .Values.airbaseOSSPublicBucket }}/`)
       kind: Rule
-      middlewares:
-        - name: {{ include "jet-chart.fullname" . }}-compress
       services:
         - name: {{ include "jet-chart.fullname" . }}-minio
           port: 9090
+      {{- include "jet-chart.minio-ingress-route-middlewares" . | nindent 6 }}
   {{- include "jet-chart.minio-tls-options" . | nindent 2 }}

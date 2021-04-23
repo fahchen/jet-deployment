@@ -84,8 +84,30 @@ tls:
 Return the proper tls config for minio
 */}}
 {{- define "jet-chart.minio-tls-options" }}
-{{- if .Values.jetTLSSecret | empty | not }}
+{{- if .Values.minioTLSSecret | empty | not }}
 tls:
   secretName: {{ .Values.minioTLSSecret }}
+{{- end }}
+{{- end }}
+
+{{/*
+Return the common middlewares for jet ingress-routes
+*/}}
+{{- define "jet-chart.jet-ingress-route-middlewares" }}
+middlewares:
+  - name: {{ include "jet-chart.fullname" . }}-compress
+{{- if .Values.jetTLSSecret | empty | not }}
+  - name: {{ include "jet-chart.fullname" . }}-redis-to-https
+{{- end }}
+{{- end }}
+
+{{/*
+Return the common middlewares for minio ingress-routes
+*/}}
+{{- define "jet-chart.minio-ingress-route-middlewares" }}
+middlewares:
+  - name: {{ include "jet-chart.fullname" . }}-compress
+{{- if .Values.minioTLSSecret | empty | not }}
+  - name: {{ include "jet-chart.fullname" . }}-redis-to-https
 {{- end }}
 {{- end }}
