@@ -10,14 +10,6 @@ helm repo update
 helm install traefik traefik/traefik
 ````
 
-### create imagePullSecrets
-```bash
-kubectl create secret docker-registry jethangzhouregistry \
-          --docker-server=$DOCKER_REGISTRY \
-          --docker-username=$DOCKER_USERNAME \
-          --docker-password=$DOCKER_PASSWORD
-```
-
 ### Prepare config file
 ```bash
 touch values.local.yaml
@@ -25,25 +17,25 @@ touch values.local.yaml
 
 ```yaml
 # values.local.yaml
+imageCredentials:
+  registry: registry.cn-hangzhou.aliyuncs.com
+  username: deploy-man@skylark
+  password: changeit
+```
+
+```yaml
+# values.local.yaml
 
 airbase:
   image:
-    registry: registry.cn-hangzhou.aliyuncs.com
     repository: jet/airbase_umbrella
     tag: "release"
-    imagePullSecrets:
-      # the secret created above
-      - name: jetregistry
     pullPolicy: IfNotPresent
 
 aircrew:
   image:
-    registry: registry.ap-northeast-1.aliyuncs.com
     airbaseRepository: jet/aircrew
     tag: "release"
-    imagePullSecrets:
-      # the secret created above
-      - name: jetregistry
     pullPolicy: IfNotPresent
 ```
 

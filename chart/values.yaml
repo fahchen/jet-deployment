@@ -5,12 +5,16 @@
 nameOverride: ""
 fullnameOverride: ""
 
+imageCredentials:
+  registry:
+  username:
+  password:
+  email: dev@byzan.team
+
 airbase:
   image:
-    registry: registry.ap-northeast-1.aliyuncs.com
     repository: jet/airbase_umbrella
     tag: "release"
-    imagePullSecrets: []
     pullPolicy: Always
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -26,10 +30,8 @@ airbase:
 
 aircrew:
   image:
-    registry: registry.ap-northeast-1.aliyuncs.com
     airbaseRepository: jet/aircrew
     tag: "release"
-    imagePullSecrets: []
     pullPolicy: Always
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious

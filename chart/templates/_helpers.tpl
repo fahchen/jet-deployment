@@ -54,7 +54,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Return the proper Airbase image name
 */}}
 {{- define "jet-chart.airbase-image" }}
-{{- $registryName := .Values.airbase.image.registry -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.airbase.image.repository -}}
 {{- $tag := .Values.airbase.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
@@ -64,7 +64,7 @@ Return the proper Airbase image name
 Return the proper Aircrew image name
 */}}
 {{- define "jet-chart.aircrew-image" }}
-{{- $registryName := .Values.aircrew.image.registry -}}
+{{- $registryName := .Values.imageCredentials.registry -}}
 {{- $repositoryName := .Values.aircrew.image.repository -}}
 {{- $tag := .Values.aircrew.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
