@@ -1,46 +1,84 @@
+{{- $airbaseRules := list }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/api`, `/explorer`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/subscriptions/`, `/live/`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/app_store/api`, `/app_store/explorer`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/oss/`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/ops/`)" .Values.jetHost) }}
+
+{{- $aircrewRules := list }}
+{{- $aircrewRules = append $aircrewRules (printf "Host(`%s`)" .Values.jetHost) }}
+
+{{/*
+Return the common middlewares for web ingress-routes
+*/}}
+{{- define "web-middlewares" -}}
+middlewares:
+{{- if .Values.jetTLSSecret | empty }}
+  - name: {{ include "jet-chart.fullname" . }}-compress
+{{- else }}
+  - name: {{ include "jet-chart.fullname" . }}-redirect-to-https
+{{- end }}
+{{- end }}
+
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: {{ include "jet-chart.fullname" . }}-jet
+  name: {{ include "jet-chart.fullname" . }}-jet-web
 spec:
   entryPoints:
     - web
+  routes:
+    {{- range $airbaseRules }}
+    - match: {{ . }}
+      kind: Rule
+      services:
+        - name: {{ include "jet-chart.fullname" $ }}-airbase
+          port: 80
+      {{- include "web-middlewares" $ | nindent 6 -}}
+    {{- end }}
+
+    {{- range $aircrewRules }}
+    - match: {{ . }}
+      kind: Rule
+      services:
+        - name: {{ include "jet-chart.fullname" $ }}-aircrew
+          port: 80
+      {{- include "web-middlewares" $ | nindent 6 }}
+    {{- end }}
+
+---
+
+{{- if .Values.jetTLSSecret | empty | not }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-jet-websecure
+spec:
+  entryPoints:
     - websecure
   routes:
-    - match: Host(`{{ .Values.jetHost }}`) && Path(`/api`, `/explorer`)
+    {{- range $airbaseRules }}
+    - match: {{ . }}
       kind: Rule
       services:
-        - name: {{ include "jet-chart.fullname" . }}-airbase
+        - name: {{ include "jet-chart.fullname" $ }}-airbase
           port: 80
-      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
-    - match: Host(`{{ .Values.jetHost }}`) && PathPrefix(`/subscriptions/`, `/live/`)
+      middlewares:
+        - name: {{ include "jet-chart.fullname" $ }}-compress
+      tls: {}
+    {{- end }}
+
+    {{- range $aircrewRules }}
+    - match: {{ . }}
       kind: Rule
       services:
-        - name: {{ include "jet-chart.fullname" . }}-airbase
+        - name: {{ include "jet-chart.fullname" $ }}-aircrew
           port: 80
-      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
-    - match: Host(`{{ .Values.jetHost }}`) && Path(`/app_store/api`, `/app_store/explorer`)
-      kind: Rule
-      services:
-        - name: {{ include "jet-chart.fullname" . }}-airbase
-          port: 80
-      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
-    - match: Host(`{{ .Values.jetHost }}`) && PathPrefix(`/oss/`)
-      kind: Rule
-      services:
-        - name: {{ include "jet-chart.fullname" . }}-airbase
-          port: 80
-      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
-    - match: Host(`{{ .Values.jetHost }}`) && PathPrefix(`/ops/`)
-      kind: Rule
-      services:
-        - name: {{ include "jet-chart.fullname" . }}-airbase
-          port: 80
-      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
-    - match: Host(`{{ .Values.jetHost }}`)
-      kind: Rule
-      services:
-        - name: {{ include "jet-chart.fullname" . }}-aircrew
-          port: 80
-      {{- include "jet-chart.jet-ingress-route-middlewares" . | nindent 6 }}
-  {{- include "jet-chart.jet-tls-options" . | nindent 2 }}
+      middlewares:
+        - name: {{ include "jet-chart.fullname" $ }}-compress
+      tls: {}
+    {{- end }}
+
+  tls:
+    secretName: {{ .Values.jetTLSSecret }}
+{{- end }}

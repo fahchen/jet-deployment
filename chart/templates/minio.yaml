@@ -1,3 +1,20 @@
+{{- $rules := list }}
+{{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`/minio/`)" .Values.minioHost) }}
+{{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`/{{ .Values.airbaseOSSPrivateBucket }}/`)" .Values.minioHost) }}
+{{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`/{{ .Values.airbaseOSSPublicBucket }}/`)" .Values.minioHost) }}
+
+{{/*
+Return the common middlewares for web ingress-routes
+*/}}
+{{- define "web-middlewares" -}}
+middlewares:
+{{- if .Values.jetTLSSecret | empty }}
+  - name: {{ include "jet-chart.fullname" . }}-compress
+{{- else }}
+  - name: {{ include "jet-chart.fullname" . }}-redirect-to-https
+{{- end }}
+{{- end }}
+
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -5,24 +22,36 @@ metadata:
 spec:
   entryPoints:
     - web
+  routes:
+    {{- range $rules }}
+    - match: {{ . }}
+      kind: Rule
+      services:
+        - name: {{ include "jet-chart.fullname" $ }}-minio
+          port: 9090
+      {{- include "web-middlewares" $ | nindent 6 }}
+    {{- end }}
+
+---
+
+{{- if .Values.minioTLSSecret | empty | not }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-minio-websecure
+spec:
+  entryPoints:
     - websecure
   routes:
-    - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/minio/`)
+    {{- range $rules }}
+    - match: {{ . }}
       kind: Rule
       services:
-        - name: {{ include "jet-chart.fullname" . }}-minio
+        - name: {{ include "jet-chart.fullname" $ }}-minio
           port: 9090
-      {{- include "jet-chart.minio-ingress-route-middlewares" . | nindent 6 }}
-    - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/{{ .Values.airbaseOSSPrivateBucket }}/`)
-      kind: Rule
-      services:
-        - name: {{ include "jet-chart.fullname" . }}-minio
-          port: 9090
-      {{- include "jet-chart.minio-ingress-route-middlewares" . | nindent 6 }}
-    - match: Host(`{{ .Values.minioHost }}`) && PathPrefix(`/{{ .Values.airbaseOSSPublicBucket }}/`)
-      kind: Rule
-      services:
-        - name: {{ include "jet-chart.fullname" . }}-minio
-          port: 9090
-      {{- include "jet-chart.minio-ingress-route-middlewares" . | nindent 6 }}
-  {{- include "jet-chart.minio-tls-options" . | nindent 2 }}
+      middlewares:
+        - name: {{ include "jet-chart.fullname" $ }}-compress
+    {{- end }}
+  tls:
+    secretName: {{ .Values.minioTLSSecret }}
+{{- end }}
