@@ -53,5 +53,5 @@ spec:
         - name: {{ include "jet-chart.fullname" $ }}-compress
     {{- end }}
   tls:
-    secretName: {{ .Values.minioTLSSecret }}
+    secretName: {{ include "jet-chart.fullname" $ }}-mimio-tls-secret
 {{- end }}

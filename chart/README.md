@@ -52,11 +52,9 @@ aircrew:
 
 # [Jet]
 jetHost: supervision.jet.localhost
-jetTLSSecret: a
 
 # [Minio]
 minioHost: supervision.jet.localhost
-minioTLSSecret: b
 ```
 
 ```yaml
@@ -97,18 +95,16 @@ make install RELEASE=workflow
 ## HowTo
 
 ### Setup TLS
-```bash
-# create secrets
-kubectl create secret tls minio-tls-secret \
-  --cert=oss.workflow.jet.work.pem \
-  --key=oss.workflow.jet.work.key
-
-kubectl create secret tls jet-tls-secret \
-  --cert=workflow.jet.work.pem \
-  --key=workflow.jet.work.key
-```
 ```yaml
-# set values in `values.local.yaml`
-jetTLSSecret: jet-tls-secret
-minioTLSSecret: minio-tls-secret
+# values.local.yaml
+
+# [Jet]
+jetTLSSecret:
+  certificate: base64 encoded certificate-file
+  key: base64 encoded key-file
+
+# [Minio]
+minioTLSSecret:
+  certificate: base64 encoded certificate-file
+  key: base64 encoded key-file
 ```

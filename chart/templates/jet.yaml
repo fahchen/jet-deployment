@@ -80,5 +80,5 @@ spec:
     {{- end }}
 
   tls:
-    secretName: {{ .Values.jetTLSSecret }}
+    secretName: {{ include "jet-chart.fullname" $ }}-jet-tls-secret
 {{- end }}
