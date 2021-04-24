@@ -15,6 +15,7 @@ helm install traefik traefik/traefik
 touch values.local.yaml
 ```
 
+1. set imageCredentials for image pulling
 ```yaml
 # values.local.yaml
 imageCredentials:
@@ -23,6 +24,7 @@ imageCredentials:
   password: changeit
 ```
 
+2. set image info for image pulling
 ```yaml
 # values.local.yaml
 
@@ -39,6 +41,7 @@ aircrew:
     pullPolicy: IfNotPresent
 ```
 
+3. set host for jet and minio
 ```yaml
 # values.local.yaml
 
@@ -49,6 +52,7 @@ jetHost: supervision.jet.localhost
 minioHost: supervision.jet.localhost
 ```
 
+4. set IPs for external services
 ```yaml
 # values.local.yaml
 
@@ -69,6 +73,7 @@ sonicGenericIP: 10.0.0.18
 sonicUsersNamesIP: 10.0.0.18
 ```
 
+5. setup scixir
 ```yaml
 # values.local.yaml
 
