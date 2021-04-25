@@ -6,9 +6,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 imageCredentials:
-  registry:
-  username:
-  password:
+  registry: registry.cn-hangzhou.aliyuncs.com
+  username: deploy-man@skylark
+  password: changeit
   email: dev@byzan.team
 
 airbase:
