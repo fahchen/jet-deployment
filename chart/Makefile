@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 ifneq ($(wildcard .env),)
-include .env
+	include .env
 endif
 
 ifndef RELEASE
