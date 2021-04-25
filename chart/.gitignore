@@ -1,3 +1,6 @@
 /charts/*.tgz
+
 values.local.yaml
 /templates/external_depelements/
+
+.env

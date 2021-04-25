@@ -85,6 +85,18 @@ scixir:
 
 ## Commands
 ```bash
+# set `RELEASE` in `.env` file
+
+# .env
+RELEASE=workflow
+
+# install
+make install
+```
+
+OR
+
+```bash
 # install with name of `workflow`
 make install RELEASE=workflow
 ```

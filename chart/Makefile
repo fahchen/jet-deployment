@@ -1,6 +1,12 @@
 .DEFAULT_GOAL := help
 
-RELEASE ?= jet
+ifneq ($(wildcard .env),)
+include .env
+endif
+
+ifndef RELEASE
+	ERR = $(error Please provide `RELEASE` in `.env` file or set it in env vars)
+endif
 
 .PHONY: help install uninstall airbase rollout-airbase
 
@@ -27,5 +33,6 @@ dryrun: echo-release
 	@helm install -f values.local.yaml --dry-run $(RELEASE) ./
 
 echo-release:
+	$(ERR)
 	# ReleaseName: `$(RELEASE)`
 	# ----------------------
