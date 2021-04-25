@@ -51,6 +51,7 @@ spec:
           port: 9090
       middlewares:
         - name: {{ include "jet-chart.fullname" $ }}-compress
+      tls: {}
     {{- end }}
   tls:
     secretName: {{ include "jet-chart.fullname" $ }}-mimio-tls-secret
