@@ -1,9 +1,15 @@
 {{- $airbaseRules := list }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/api`, `/explorer`)" .Values.jetHost) }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/subscriptions/`, `/live/`)" .Values.jetHost) }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/app_store/api`, `/app_store/explorer`)" .Values.jetHost) }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/oss/`)" .Values.jetHost) }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/ops/`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/api`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/explorer`)" .Values.jetHost) }}
+
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/subscriptions`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/live`)" .Values.jetHost) }}
+
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/app_store/api`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/app_store/explorer`)" .Values.jetHost) }}
+
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/oss`)" .Values.jetHost) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/ops`)" .Values.jetHost) }}
 
 {{- $aircrewRules := list }}
 {{- $aircrewRules = append $aircrewRules (printf "Host(`%s`)" .Values.jetHost) }}
