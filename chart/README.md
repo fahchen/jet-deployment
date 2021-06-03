@@ -116,4 +116,6 @@ jetTLSSecret:
 minioTLSSecret:
   certificate: base64 encoded certificate-file
   key: base64 encoded key-file
+minioScheme: https://
+minioPort: 443
 ```
