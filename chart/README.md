@@ -36,7 +36,7 @@ airbase:
 
 aircrew:
   image:
-    airbaseRepository: jet/aircrew
+    repository: jet/aircrew
     tag: "release"
     pullPolicy: IfNotPresent
 ```
