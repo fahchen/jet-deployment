@@ -20,3 +20,7 @@ down: ## Stop services
 ps: ## List services
 	# List services...
 	@docker-compose $(files) ps
+
+postgresql: ## Enter Postgres
+	# Entering Postgres...
+	@docker-compose $(files) exec postgresql sh
