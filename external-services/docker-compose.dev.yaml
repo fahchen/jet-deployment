@@ -56,24 +56,6 @@ services:
       - 5432:5432
     networks:
       - external-services-network
-  # redis
-  redis:
-    image: redis:6.0-alpine
-    env_file:
-      - external-services.env
-      - external-services.local.env
-    volumes:
-      - ./volume/config/redis:/usr/local/etc/redis
-    command:
-      - sh
-      - -c
-      - |
-        redis-server $$REDIS_CONFIG_PATH
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-    networks:
-      - external-services-network
   # sonic
   sonic:
     image: valeriansaliou/sonic:v1.3.0
