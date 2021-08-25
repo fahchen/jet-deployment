@@ -24,3 +24,9 @@ ps: ## List services
 postgresql: ## Enter Postgres
 	# Entering Postgres...
 	@docker-compose $(files) exec postgresql sh
+
+dev_up: ## Start dev deps
+	@docker-compose -f docker-compose.dev.yaml up -d
+
+dev_down: ## Stop dev deps
+	@docker-compose -f docker-compose.dev.yaml down
