@@ -26,8 +26,6 @@ spec:
             - configMapRef:
                 name: {{ include "jet-chart.fullname" . }}-postgresql
             - configMapRef:
-                name: {{ include "jet-chart.fullname" . }}-redis
-            - configMapRef:
                 name: {{ include "jet-chart.fullname" . }}-generic-sonic
             - configMapRef:
                 name: {{ include "jet-chart.fullname" . }}-users-names-sonic

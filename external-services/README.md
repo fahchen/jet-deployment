@@ -21,7 +21,6 @@ touch external-services.local.env
 
 ```env
 # external-services.local.env
-REDIS_CONFIG_PATH="/usr/local/etc/redis/redis.conf"
 POSTGRES_CONFIG_PATH="/usr/local/etc/postgresql/postgresql.conf"
 MINIO_REDIS_CONFIG_PATH="/usr/local/etc/redis/redis.conf"
 ```

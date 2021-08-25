@@ -98,11 +98,6 @@ postgresqlAirbasePoolSize: 30
 postgresqlEventStoreDatabase: eventstore_prod
 postgresqlEventStorePoolSize: 60
 
-# [Redis]
-redisIP: 10.0.0.18
-redisPort: 6379
-redisPoolSize: 5
-
 # [Minio]
 minioAccessKey: minio
 minioSecretKey: minio123

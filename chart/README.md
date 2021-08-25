@@ -61,9 +61,6 @@ minioHost: supervision.jet.localhost
 # [PostgreSQL]
 postgresqlIP: 10.0.0.18
 
-# [Redis]
-redisIP: 10.0.0.18
-
 # [Minio]
 minioServiceIP: 10.0.0.18
 minioredisIP: 10.0.0.18
