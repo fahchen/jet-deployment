@@ -5,9 +5,6 @@
 {{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/subscriptions`)" .Values.jetHost) }}
 {{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/live`)" .Values.jetHost) }}
 
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/app_store/api`)" .Values.jetHost) }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`/app_store/explorer`)" .Values.jetHost) }}
-
 {{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/oss`)" .Values.jetHost) }}
 {{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/ops`)" .Values.jetHost) }}
 
