@@ -9,7 +9,7 @@
 {{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`/ops`)" .Values.jetHost) }}
 
 {{- $aircrewRules := list }}
-{{- $aircrewRules = append $aircrewRules (printf "Host(`%s`)" .Values.jetHost) }}
+{{- $aircrewRules = append $aircrewRules (printf "Host(`%s`) && PathPrefix(`/jet-aircrew`)" .Values.jetHost) }}
 
 {{/*
 Return the common middlewares for web ingress-routes
