@@ -60,16 +60,6 @@ Return the proper Airbase image name
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end }}
 
-{{/*
-Return the proper Aircrew image name
-*/}}
-{{- define "jet-chart.aircrew-image" }}
-{{- $registryName := .Values.imageCredentials.registry -}}
-{{- $repositoryName := .Values.aircrew.image.repository -}}
-{{- $tag := .Values.aircrew.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-{{- end }}
-
 {{/* Build clean path.(//jet -> /jet) */}}
 {{- define "jet-chart.build-path" }}
 {{- $subpath := default "/" .Values.jetSubpath -}}

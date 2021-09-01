@@ -8,13 +8,9 @@
 {{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (merge (dict "path" "/oss") .))) }}
 {{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (merge (dict "path" "/ops") .))) }}
 
-{{- $aircrewRules := list }}
-{{- $aircrewRules = append $aircrewRules (printf "Host(`%s`) && PathPrefix(`%s/aircrew`)" .Values.jetHost .Values.jetSubpath) }}
-
 {{/* Middlewares for web ingress-routes */}}
 {{- $webMiddlewares := list }}
 {{- $webMiddlewares = append $webMiddlewares "strip-subpath" }}
-{{- $webMiddlewares = append $webMiddlewares "strip-aircrew-prefix" }}
 {{- $webMiddlewares = append $webMiddlewares "compress" }}
 {{- if .Values.jetTLSSecret | empty | not }}
 {{- $webMiddlewares = append $webMiddlewares "redirect-to-https" }}
@@ -23,7 +19,6 @@
 {{/* Middlewares for websecure ingress-routes */}}
 {{- $websecureMiddlewares := list }}
 {{- $websecureMiddlewares = append $websecureMiddlewares "strip-subpath" }}
-{{- $websecureMiddlewares = append $websecureMiddlewares "strip-aircrew-prefix" }}
 {{- $websecureMiddlewares = append $websecureMiddlewares "compress" }}
 
 apiVersion: traefik.containo.us/v1alpha1
@@ -45,19 +40,6 @@ spec:
         - name: {{ include "jet-chart.fullname" $ }}-{{ . }}
         {{- end}}
     {{- end }}
-
-    {{- range $aircrewRules }}
-    - match: {{ . }}
-      kind: Rule
-      services:
-        - name: {{ include "jet-chart.fullname" $ }}-aircrew
-          port: 80
-      middlewares:
-        {{- range $webMiddlewares }}
-        - name: {{ include "jet-chart.fullname" $ }}-{{ . }}
-        {{- end}}
-    {{- end }}
-
 ---
 
 {{- if .Values.jetTLSSecret | empty | not }}
@@ -81,20 +63,6 @@ spec:
         {{- end}}
       tls: {}
     {{- end }}
-
-    {{- range $aircrewRules }}
-    - match: {{ . }}
-      kind: Rule
-      services:
-        - name: {{ include "jet-chart.fullname" $ }}-aircrew
-          port: 80
-      middlewares:
-        {{- range $websecureMiddlewares }}
-        - name: {{ include "jet-chart.fullname" $ }}-{{ . }}
-        {{- end}}
-      tls: {}
-    {{- end }}
-
   tls:
     secretName: {{ include "jet-chart.fullname" $ }}-jet-tls-secret
 {{- end }}

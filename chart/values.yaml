@@ -28,23 +28,6 @@ airbase:
     #   cpu: 100m
     #   memory: 128Mi
 
-aircrew:
-  image:
-    repository: jet/aircrew
-    tag: "release"
-    pullPolicy: Always
-  resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -55,7 +38,7 @@ autoscaling:
 nodeSelector: {}
 
 # [Jet]
-jetSubpath:
+jetSubpath: /
 jetHost: jet.localhost
 jetTLSSecret:
 
@@ -116,27 +99,6 @@ sonicGenericPassword: SecretPassword
 sonicUsersNamesIP: 10.0.0.18
 sonicUsersNamesPort: 1492
 sonicUsersNamesPassword: SecretPassword
-
-# [Aircrew]
-aircrewAppName: Jet
-aircrewLocaleDomain: default
-aircrewAppAssetsHost: https://oss.jet.localhost/minio-public
-
-aircrewSentryDsn: ""
-aircrewSentryRelease: beta
-
-## -- homepage --
-# 是否展示主页
-aircrewHomepage: false
-# ICP 备案文案
-aircrewICPRecord: ""
-# ICP 备案指向链接
-aircrewICPRecordLink: ""
-# 公安部备案文案
-aircrewCyberSecurityRecord: ""
-# 公安部备案指向链接
-aircrewCyberSecurityRecordLink: ""
-
 
 # Dependencies
 

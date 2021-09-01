@@ -33,12 +33,6 @@ airbase:
     repository: jet/airbase_umbrella
     tag: "release"
     pullPolicy: IfNotPresent
-
-aircrew:
-  image:
-    repository: jet/aircrew
-    tag: "release"
-    pullPolicy: IfNotPresent
 ```
 
 3. set host for jet and minio
