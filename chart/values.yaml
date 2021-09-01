@@ -55,6 +55,7 @@ autoscaling:
 nodeSelector: {}
 
 # [Jet]
+jetSubpath:
 jetHost: jet.localhost
 jetTLSSecret:
 

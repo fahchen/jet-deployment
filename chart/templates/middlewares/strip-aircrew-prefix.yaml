@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-strip-aircrew-prefix
+spec:
+  stripPrefix:
+    prefixes:
+      - "/aircrew"
+    forceSlash: true

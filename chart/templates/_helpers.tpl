@@ -69,3 +69,9 @@ Return the proper Aircrew image name
 {{- $tag := .Values.aircrew.image.tag | toString -}}
 {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end }}
+
+{{/* Build clean path.(//jet -> /jet) */}}
+{{- define "jet-chart.build-path" }}
+{{- $subpath := default "/" .Values.jetSubpath -}}
+{{- printf "/%s/%s" $subpath .path | clean -}}
+{{- end }}

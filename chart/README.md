@@ -116,3 +116,11 @@ minioTLSSecret:
 minioScheme: https://
 minioPort: 443
 ```
+
+### Subpath support
+```yaml
+# values.local.yaml
+
+# [Jet]
+jetSubpath: /jet
+```

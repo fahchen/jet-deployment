@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-strip-subpath
+spec:
+  stripPrefix:
+    prefixes:
+      - {{ .Values.jetSubpath }}
+    forceSlash: true
