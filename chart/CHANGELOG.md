@@ -1,3 +1,6 @@
+### 0.2.2
+- remove aircrew from the chart
+
 ### 0.2.1
 - fix https redirection
 - `airbase(aircrew).image.imagePullSecret` and `airbase(aircrew).image.registry` in `image` move to top level `imageCredentials`
