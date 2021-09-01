@@ -3,17 +3,16 @@
 {{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`/%s`)" .Values.minioHost .Values.airbaseOSSPrivateBucket) }}
 {{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`/%s`)" .Values.minioHost .Values.airbaseOSSPublicBucket) }}
 
-{{/*
-Return the common middlewares for web ingress-routes
-*/}}
-{{- define "web-middlewares" -}}
-middlewares:
-{{- if .Values.jetTLSSecret | empty }}
-  - name: {{ include "jet-chart.fullname" . }}-compress
-{{- else }}
-  - name: {{ include "jet-chart.fullname" . }}-redirect-to-https
+{{/* Middlewares for web ingress-routes */}}
+{{- $webMiddlewares := list }}
+{{- $webMiddlewares = append $webMiddlewares "compress" }}
+{{- if .Values.minioTLSSecret | empty | not }}
+{{- $webMiddlewares = append $webMiddlewares "redirect-to-https" }}
 {{- end }}
-{{- end }}
+
+{{/* Middlewares for websecure ingress-routes */}}
+{{- $websecureMiddlewares := list }}
+{{- $websecureMiddlewares = append $websecureMiddlewares "compress" }}
 
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -29,7 +28,10 @@ spec:
       services:
         - name: {{ include "jet-chart.fullname" $ }}-minio
           port: 9090
-      {{- include "web-middlewares" $ | nindent 6 }}
+      middlewares:
+        {{- range $webMiddlewares }}
+        - name: {{ include "jet-chart.fullname" $ }}-{{ . }}
+        {{- end}}
     {{- end }}
 
 ---
@@ -50,7 +52,9 @@ spec:
         - name: {{ include "jet-chart.fullname" $ }}-minio
           port: 9090
       middlewares:
-        - name: {{ include "jet-chart.fullname" $ }}-compress
+        {{- range $websecureMiddlewares }}
+        - name: {{ include "jet-chart.fullname" $ }}-{{ . }}
+        {{- end}}
       tls: {}
     {{- end }}
   tls:
