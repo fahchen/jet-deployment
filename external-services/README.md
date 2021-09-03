@@ -9,7 +9,6 @@ make up
 1. Prepare config files
 
 ```bash
-cp volume/config/redis/redis.sample.conf volume/config/redis/redis.conf
 cp volume/config/postgresql/postgresql.sample.conf volume/config/postgresql/postgresql.conf
 cp volume/config/minio/redis/redis.sample.conf volume/config/minio/redis/redis.conf
 ```
@@ -27,7 +26,7 @@ MINIO_REDIS_CONFIG_PATH="/usr/local/etc/redis/redis.conf"
 
 3. Start services
 ```bash
-docker-compose -f docker-compose.yaml -f redis.yaml -f sonic.yaml -f postgresql.yaml -f minio.yaml up -d
+docker-compose -f docker-compose.yaml -f sonic.yaml -f postgresql.yaml -f minio.yaml up -d
 ```
 
 #### Misc
