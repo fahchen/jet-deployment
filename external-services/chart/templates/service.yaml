@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "jet-external-services.fullname" . }}
+  labels:
+    {{- include "jet-external-services.labels" . | nindent 4 }}
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 5432
+      protocol: TCP
+      name: postgres
+    - port: 9000
+      protocol: TCP
+      name: minio
+    - port: 1491
+      protocol: TCP
+      name: sonic
+  selector:
+    {{- include "jet-external-services.selectorLabels" . | nindent 4 }}
