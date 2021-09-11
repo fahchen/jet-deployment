@@ -26,6 +26,14 @@ airbase: echo-release ## Enter the runnig airbase container
 	# Entering airbase...
 	@kubectl exec -it `kubectl get pods --selector "app=$(RELEASE)-jet-chart-airbase" --output=name` -- sh
 
+tail-airbase: echo-release ## Logging the runnig airbase container
+	# Logging airbase...
+	@kubectl logs -f --tail=0 `kubectl get pods --selector "app=$(RELEASE)-jet-chart-airbase" --output=name`
+
+log-airbase: echo-release ## Logging the runnig airbase container
+	# Logging airbase...
+	@kubectl logs -f `kubectl get pods --selector "app=$(RELEASE)-jet-chart-airbase" --output=name`
+
 rollout-airbase: echo-release ## Restart Airbase
 	@kubectl rollout restart deploy/$(RELEASE)-jet-chart-airbase
 
