@@ -71,11 +71,3 @@ probes:
             echo >&2 "k3s is not running yet"
             exit 1
     fi
-
-portForwards:
-  - guestPort: 5432
-    hostIP: "0.0.0.0"
-  - guestPort: 9000
-    hostIP: "0.0.0.0"
-  - guestPort: 1491
-    hostIP: "0.0.0.0"

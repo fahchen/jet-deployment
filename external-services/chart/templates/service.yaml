@@ -5,15 +5,21 @@ metadata:
   labels:
     {{- include "jet-external-services.labels" . | nindent 4 }}
 spec:
-  type: LoadBalancer
+  type: NodePort
+  selector:
+    matchLabels:
+      {{- include "jet-external-services.selectorLabels" . | nindent 6 }}
   ports:
     - port: 5432
+      nodePort: 30001
       protocol: TCP
       name: postgres
     - port: 9000
+      nodePort: 30002
       protocol: TCP
       name: minio
     - port: 1491
+      nodePort: 30003
       protocol: TCP
       name: sonic
   selector:
