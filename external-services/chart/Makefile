@@ -14,7 +14,7 @@ upgrade: ## Upgrade the relase
 	@helm upgrade -f values.local.yaml $(RELEASE) ./
 
 uninstall: ## Uninstall current release
-	@helm uninstall -f values.local.yaml $(RELEASE)
+	@helm uninstall $(RELEASE)
 
 dryrun: ## dryrun
 	@helm install -f values.local.yaml --dry-run $(RELEASE) ./
