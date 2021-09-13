@@ -56,7 +56,12 @@ provision:
 
   hint: |
     To start external services.
-    `cd ~/jet-deployment/external-services/chart && make install`
+
+    ```shell
+    cd ~/jet-deployment/external-services/chart
+    touch values.local.yaml
+    make install
+    ```
 
 probes:
 - script: |
