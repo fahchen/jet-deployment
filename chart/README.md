@@ -94,6 +94,11 @@ make install RELEASE=workflow
 
 ## HowTo
 
+### Build dependencies
+```bash
+helm dependencies build
+```
+
 ### Setup TLS
 ```yaml
 # values.local.yaml
