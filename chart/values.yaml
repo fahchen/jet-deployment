@@ -50,6 +50,11 @@ airbaseLoggerLevel: info
 airbaseOSSPrivateBucket: minio-private
 airbaseOSSPublicBucket: minio-public
 
+airbaseStorageDatabaseFileFieldFilesizeMax: 10485760
+airbaseStorageDatabaseTransportationImportationSourceFilesizeMax: 10485760
+airbaseStorageDatabaseTransportationImportationFailureFilesizeMax: 10485760
+airbaseStorageSandboxProgramFilesizeMax: 10485760
+
 airbaseAlixirSMSAccessKeyID: abc
 airbaseAlixirSMSAccessSecret: overwriteit
 airbaseAlixirSMSAccessVerificationCodeSignName: 了了科技
@@ -81,16 +86,14 @@ postgresqlEventStoreDatabase: eventstore_prod
 postgresqlEventStorePoolSize: 60
 
 # [Minio]
-minioAccessKey: minio
-minioSecretKey: minio123
+minioRootUser: minio
+minioRootPassword: minio123
 minioScheme: http://
 minioHost: oss.jet.localhost
 minioTLSSecret:
 minioPort: 80
 minioServiceIP: 10.0.0.18
 minioServicePort: 9090
-minioredisIP: 10.0.0.18
-minioredisPort: 6389
 
 # [Sonic]
 sonicGenericIP: 10.0.0.18
