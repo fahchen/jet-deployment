@@ -102,12 +102,3 @@ sonicGenericPassword: SecretPassword
 sonicUsersNamesIP: 10.0.0.18
 sonicUsersNamesPort: 1492
 sonicUsersNamesPassword: SecretPassword
-
-# Dependencies
-
-# [Scixir]
-scixir: {}
-  # SET IT
-  # minioRedisUrl: redis://{{ include "jet-chart.fullname" . }}-minioredis:6379/0
-  # SET IT
-  # minioHost: {{ include "jet-chart.fullname" . }}-minio
