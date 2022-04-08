@@ -63,6 +63,8 @@ airbaseAlixirSMSAccessVerificationCodeTemplateCode: changeti
 airbaseSentryDsn: ""
 airbaseSentryRelease: beta
 
+airbaseJokenSigner: "$ecrEt"
+
 airbaseWechatAppID: ""
 airbaseWechatSecret: ""
 airbaseWechatAuditCode: ""

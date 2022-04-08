@@ -34,6 +34,8 @@ data:
   JET_SENTRY_DSN: {{ .Values.airbaseSentryDsn | quote }}
   JET_RELEASE: {{ .Values.airbaseSentryRelease | quote }}
 
+  JET_JOKEN_SIGNER: {{ .Values.airbaseJokenSigner | quote }}
+
   WECHAT_APP_ID: {{ .Values.airbaseWechatAppID | quote }}
   WECHAT_SECRET: {{ .Values.airbaseWechatSecret | quote }}
   WECHAT_AUDIT_PHONE: {{ .Values.airbasewechatAuditPhone | quote }}
