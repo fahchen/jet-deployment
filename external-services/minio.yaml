@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   minio:
-    image: minio/minio:RELEASE.2022-03-24T00-43-44Z
+    image: minio/minio:RELEASE.2022-04-01T03-41-39Z
     volumes:
       - ./volume/data/minio/data:/data
     env_file:
