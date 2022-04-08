@@ -21,10 +21,10 @@ data:
   JET_OSS_PRIVATE_BUCKET: {{ .Values.airbaseOSSPrivateBucket }}
   JET_OSS_PUBLIC_BUCKET: {{ .Values.airbaseOSSPublicBucket }}
 
-  JET_STORAGE_DATABASE_FILE_FIELD_FILESIZE_MAX: {{ .Values.airbaseStorageDatabaseFileFieldFilesizeMax }}
-  JET_STORAGE_DATABASE_TRANSPORTATION_IMPORTATION_SOURCE_FILESIZE_MAX: {{ .Values.airbaseStorageDatabaseTransportationImportationSourceFilesizeMax }}
-  JET_STORAGE_DATABASE_TRANSPORTATION_IMPORTATION_FAILURE_FILESIZE_MAX: {{ .Values.airbaseStorageDatabaseTransportationImportationFailureFilesizeMax }}
-  JET_STORAGE_SANDBOX_PROGRAM_FILESIZE_MAX: {{ .Values.airbaseStorageSandboxProgramFilesizeMax }}
+  JET_STORAGE_DATABASE_FILE_FIELD_FILESIZE_MAX: {{ .Values.airbaseStorageDatabaseFileFieldFilesizeMax | int | quote }}
+  JET_STORAGE_DATABASE_TRANSPORTATION_IMPORTATION_SOURCE_FILESIZE_MAX: {{ .Values.airbaseStorageDatabaseTransportationImportationSourceFilesizeMax | int | quote }}
+  JET_STORAGE_DATABASE_TRANSPORTATION_IMPORTATION_FAILURE_FILESIZE_MAX: {{ .Values.airbaseStorageDatabaseTransportationImportationFailureFilesizeMax | int | quote }}
+  JET_STORAGE_SANDBOX_PROGRAM_FILESIZE_MAX: {{ .Values.airbaseStorageSandboxProgramFilesizeMax | int | quote }}
 
   JET_ALIXIR_SMS_ACCESS_KEY_ID: {{ .Values.airbaseAlixirSMSAccessKeyID }}
   JET_ALIXIR_SMS_ACCESS_SECRET: {{ .Values.airbaseAlixirSMSAccessSecret }}
