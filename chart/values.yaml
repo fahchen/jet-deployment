@@ -76,6 +76,8 @@ airbaseCacheBufferSize: 1
 airbaseOpsLiveDashboardUsername: ""
 airbaseOpsLiveDashboardPassword: ""
 
+# for app installation
+airbaseVolumesHostPath:
 
 # [PostgreSQL]
 postgresqlUser: postgres
