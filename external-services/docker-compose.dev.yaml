@@ -35,16 +35,3 @@ services:
       - 5432:5432
     networks:
       - external-services-network
-  # sonic
-  sonic:
-    image: valeriansaliou/sonic:v1.3.0
-    env_file:
-      - external-services.env
-      - external-services.local.env
-    volumes:
-      - ./volume/config/sonic/generic.cfg:/etc/sonic.cfg
-    restart: unless-stopped
-    ports:
-      - 1491:1491
-    networks:
-      - external-services-network
