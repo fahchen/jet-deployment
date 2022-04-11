@@ -57,10 +57,6 @@ postgresqlIP: 10.0.0.18
 
 # [Minio]
 minioServiceIP: 10.0.0.18
-
-# [Sonic]
-sonicGenericIP: 10.0.0.18
-sonicUsersNamesIP: 10.0.0.18
 ```
 
 ## Commands
