@@ -24,7 +24,7 @@ POSTGRES_CONFIG_PATH="/usr/local/etc/postgresql/postgresql.conf"
 
 3. Start services
 ```bash
-docker-compose -f docker-compose.yaml -f sonic.yaml -f postgresql.yaml -f minio.yaml up -d
+docker-compose -f docker-compose.yaml -f postgresql.yaml -f minio.yaml up -d
 ```
 
 #### Misc

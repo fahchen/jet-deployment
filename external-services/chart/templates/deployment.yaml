@@ -28,29 +28,19 @@ spec:
           volumeMounts:
             - name: postgres-persistent-storage
               mountPath: /var/lib/postgresql/data/
-        - name: sonic
-          image: valeriansaliou/sonic:v1.3.0
-          imagePullPolicy: IfNotPresent
-          command: ["sonic", "-c", "/usr/local/ect/sonic/sonic.cfg"]
-          ports:
-            - containerPort: 1491
-              protocol: TCP
-          volumeMounts:
-            - name: sonic-cfg-volume
-              mountPath: /usr/local/ect/sonic
-            - name: sonic-persistent-storage
-              mountPath: /usr/src/sonic/
         - name: minio
           image: minio/minio:RELEASE.2022-03-24T00-43-44Z
           imagePullPolicy: IfNotPresent
-          command: ["minio", "server", "/data"]
+          command: ["minio", "server", "--address", ":9090", "/data"]
           env:
             - name: MINIO_ROOT_USER
               value: minio
             - name: MINIO_ROOT_PASSWORD
               value: minio123
+            - name: MINIO_BROWSER
+              value: "off"
           ports:
-            - containerPort: 9000
+            - containerPort: 9090
               protocol: TCP
           volumeMounts:
             - name: minio-persistent-storage
@@ -59,16 +49,6 @@ spec:
         - name: postgres-persistent-storage
           hostPath:
             path: {{ include "jet-external-services.build-volume-path" (merge (dict "storageName" "postgres") $) }}
-            type: DirectoryOrCreate
-        - name: sonic-cfg-volume
-          configMap:
-            name: {{ .Release.Name }}-configmap
-            items:
-              - key: sonic.cfg
-                path: sonic.cfg
-        - name: sonic-persistent-storage
-          hostPath:
-            path: {{ include "jet-external-services.build-volume-path" (merge (dict "storageName" "sonic") $) }}
             type: DirectoryOrCreate
         - name: minio-persistent-storage
           hostPath:

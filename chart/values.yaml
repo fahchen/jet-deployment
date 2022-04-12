@@ -98,11 +98,3 @@ minioTLSSecret:
 minioPort: 80
 minioServiceIP: 10.0.0.18
 minioServicePort: 9090
-
-# [Sonic]
-sonicGenericIP: 10.0.0.18
-sonicGenericPort: 1491
-sonicGenericPassword: SecretPassword
-sonicUsersNamesIP: 10.0.0.18
-sonicUsersNamesPort: 1492
-sonicUsersNamesPassword: SecretPassword
