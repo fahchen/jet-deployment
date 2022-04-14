@@ -14,7 +14,7 @@ spec:
           command: ["/bin/sh", "./init.sh"]
           env:
             - name: MINIO_SERVER
-              value: http://{{ include "jet-external-services.fullname" . }}:9090
+              value: http://{{ include "jet-external-services.fullname" . }}:9000
           volumeMounts:
           - name: init-minio-scripts-volume
             mountPath: /usr/local/etc/scripts/

@@ -8,10 +8,10 @@ services:
     env_file:
       - external-services.env
       - external-services.local.env
-    command: server --address :9090 /data
+    command: server /data
     restart: unless-stopped
     ports:
-      - 9090:9090
+      - 9000:9000
     networks:
       - external-services-network
   # postgresql

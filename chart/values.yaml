@@ -97,4 +97,4 @@ minioHost: oss.jet.localhost
 minioTLSSecret:
 minioPort: 80
 minioServiceIP: 10.0.0.18
-minioServicePort: 9090
+minioServicePort: 9000

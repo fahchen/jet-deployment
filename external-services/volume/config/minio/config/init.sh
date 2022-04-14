@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-mc alias set minio http://minio:9090 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD
+mc alias set minio http://minio:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD
 
 setup_bucket() {
   mc mb minio/$1 --ignore-existing
