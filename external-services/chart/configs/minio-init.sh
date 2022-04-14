@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eux -o pipefail
 
-mc alias set minio $MINIO_SERVER minio minio123
+mc alias set minio $MINIO_SERVER minioadmin minioadmin
 
 setup_bucket() {
   mc mb minio/$1 --ignore-existing
