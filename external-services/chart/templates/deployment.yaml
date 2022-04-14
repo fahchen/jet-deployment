@@ -34,9 +34,9 @@ spec:
           command: ["minio", "server", "/data"]
           env:
             - name: MINIO_ROOT_USER
-              value: minio
+              value: minioadmin
             - name: MINIO_ROOT_PASSWORD
-              value: minio123
+              value: minioadmin
             - name: MINIO_BROWSER
               value: "off"
           ports:

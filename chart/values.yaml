@@ -90,8 +90,8 @@ postgresqlEventStoreDatabase: eventstore_prod
 postgresqlEventStorePoolSize: 60
 
 # [Minio]
-minioRootUser: minio
-minioRootPassword: minio123
+minioRootUser: minioadmin
+minioRootPassword: minioadmin
 minioScheme: http://
 minioHost: oss.jet.localhost
 minioTLSSecret:
