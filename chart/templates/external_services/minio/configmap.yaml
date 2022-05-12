@@ -10,3 +10,6 @@ data:
   JET_STORAGE_SCHEME: {{ .Values.minioScheme }}
   JET_STORAGE_HOST: {{ .Values.minioHost }}
   JET_STORAGE_PORT: {{ .Values.minioPort | quote }}
+  JET_STORAGE_FASTLINE_SCHEME: "http://"
+  JET_STORAGE_FASTLINE_HOST: {{ include "jet-chart.fullname" . }}-minio
+  JET_STORAGE_FASTLINE_PORT: "9000"
