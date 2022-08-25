@@ -23,3 +23,14 @@ krunvm create -p 9000:9000 -p 9001:9001 --name airbase-minio minio/minio
 # Start the vm
 krunvm start airbase-minio "minio server /data --console-address \":9001\""
 ```
+
+```bash
+# Init minio
+
+mc alias set minio http://127.0.0.1:9000 minioadmin minioadmin
+
+mc mb minio/minio-public --ignore-existing
+mc mb minio/minio-private --ignore-existing
+
+mc policy set download minio/minio-public
+```
