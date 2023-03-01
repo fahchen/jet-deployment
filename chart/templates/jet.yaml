@@ -1,12 +1,12 @@
 {{- $airbaseRules := list }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`%s`)" .Values.jetHost (include "jet-chart.build-path" (merge (dict "path" "/api") .))) }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`%s`)" .Values.jetHost (include "jet-chart.build-path" (merge (dict "path" "/explorer") .))) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`%s`)" .Values.jetHost (include "jet-chart.build-path" (dict "prefix" .Values.jetSubpath "path" "/api"))) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && Path(`%s`)" .Values.jetHost (include "jet-chart.build-path" (dict "prefix" .Values.jetSubpath "path" "/explorer"))) }}
 
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (merge (dict "path" "/subscriptions") .))) }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (merge (dict "path" "/live") .))) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (dict "prefix" .Values.jetSubpath "path" "/subscriptions"))) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (dict "prefix" .Values.jetSubpath "path" "/live"))) }}
 
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (merge (dict "path" "/oss") .))) }}
-{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (merge (dict "path" "/ops") .))) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (dict "prefix" .Values.jetSubpath "path" "/oss"))) }}
+{{- $airbaseRules = append $airbaseRules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.jetHost (include "jet-chart.build-path" (dict "prefix" .Values.jetSubpath "path" "/ops"))) }}
 
 {{/* Middlewares for web ingress-routes */}}
 {{- $webMiddlewares := list }}

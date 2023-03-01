@@ -1,6 +1,6 @@
 {{- $rules := list }}
-{{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`/%s`)" .Values.minioHost .Values.airbaseOSSPrivateBucket) }}
-{{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`/%s`)" .Values.minioHost .Values.airbaseOSSPublicBucket) }}
+{{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.minioHost (include "jet-chart.build-path" (dict "prefix" .Values.minioSubpath "path" .Values.airbaseOSSPrivateBucket))) }}
+{{- $rules = append $rules (printf "Host(`%s`) && PathPrefix(`%s`)" .Values.minioHost (include "jet-chart.build-path" (dict "prefix" .Values.minioSubpath "path" .Values.airbaseOSSPublicBucket))) }}
 
 {{/* Middlewares for web ingress-routes */}}
 {{- $webMiddlewares := list }}

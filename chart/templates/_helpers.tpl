@@ -62,6 +62,6 @@ Return the proper Airbase image name
 
 {{/* Build clean path.(//jet -> /jet) */}}
 {{- define "jet-chart.build-path" }}
-{{- $subpath := default "/" .Values.jetSubpath -}}
+{{- $subpath := default "/" .prefix -}}
 {{- printf "/%s/%s" $subpath .path | clean -}}
 {{- end }}
