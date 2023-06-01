@@ -76,6 +76,9 @@ airbaseCacheBufferSize: 1
 airbaseOpsLiveDashboardUsername: ""
 airbaseOpsLiveDashboardPassword: ""
 
+airbaseSingletonModeEnable: "false"
+airbaseSingletonModeDatabaseSchema: "database"
+
 # for app installation
 airbaseVolumesHostPath:
 

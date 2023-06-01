@@ -44,5 +44,8 @@ data:
   JET_AIRBASE_CACHE_CONCURRENCY_LIMIT: {{ .Values.airbaseCacheConcurrencyLimit | quote }}
   JET_AIRBASE_CACHE_BUFFER_SIZE: {{ .Values.airbaseCacheBufferSize | quote }}
 
+  JET_SINGLETON_MODE_ENABLE: {{ .Values.airbaseSingletonModeEnable }}
+  JET_SINGLETON_MODE_DATABASE_SCHEMA: {{ .Values.airbaseSingletonModeDatabaseSchema }}
+
   OPS_LIVE_DASHBOARD_USERNAME: {{ .Values.airbaseOpsLiveDashboardUsername | quote }}
   OPS_LIVE_DASHBOARD_PASSWORD: {{ .Values.airbaseOpsLiveDashboardPassword | quote }}
