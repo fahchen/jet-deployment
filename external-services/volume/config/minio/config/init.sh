@@ -9,4 +9,4 @@ setup_bucket() {
 setup_bucket $MINIO_PRIVATE_BUCKET
 setup_bucket $MINIO_PUBLIC_BUCKET
 
-mc policy set download minio/$MINIO_PUBLIC_BUCKET
+mc anonymous set download minio/$MINIO_PUBLIC_BUCKET
