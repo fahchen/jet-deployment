@@ -47,6 +47,8 @@ airbaseDeploymentID:
 airbaseLocaleDomain: default
 airbaseLoggerLevel: info
 
+airbaseEventHandlerSubscriptionMaxSizeOpt: 1000
+
 airbaseOSSPrivateBucket: minio-private
 airbaseOSSPublicBucket: minio-public
 
