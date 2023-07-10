@@ -103,3 +103,6 @@ minioPort: 443
 # [Jet]
 jetSubpath: /jet
 ```
+
+## Checklist
+- [ ] SMS 相关的设置
