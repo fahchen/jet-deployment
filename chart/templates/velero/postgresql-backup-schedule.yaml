@@ -1,0 +1,22 @@
+{{- with .Values.backup }}
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: {{ include "jet-chart.fullname" $ }}-postgresql-backup
+  labels:
+    {{- include "jet-chart.labels" $ | nindent 4 }}
+spec:
+  schedule: {{ .veleroSchedule }}
+  template:
+    defaultVolumesToFsBackup: true
+    includedNamespaces:
+      {{- range .includeNamespaces }}
+      - {{ . }}
+      {{- end }}
+    labelSelector:
+      matchLabels:
+        {{- .selector | toYaml | nindent 8 }}
+    storageLocation: {{ .storageLocation }}
+    ttl: {{ .ttl }}
+{{- end }}
+
