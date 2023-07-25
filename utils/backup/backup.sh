@@ -2,12 +2,6 @@
 
 set -ex
 
-# postgresql 所在 namespace
-POSTGRESQL_NAMESPACE=postgresql
-
-# postgresql 示例名称
-POSTGRESQL_INSTANCE=postgresql
-
 # minio 数据与备份位置
 MINIO_DATA_DIR=/opt/apps/data/
 MINIO_BACKUP_DIR=/opt/backup/minio
@@ -23,20 +17,6 @@ EXPIR_EDAY=30
 # 获得日期字符串
 GetDateStr () {
   echo `date +%Y%m%d`
-}
-
-# 备份 postgresql 数据
-PostgresqlDump () {
-  TTL=$(($EXPIR_EDAY*24))
-  velero create schedule postgres \
-    --schedule "0 2 * * *" \
-    --ttl $TTL \
-    --volume-snapshot-locations volume-snapshot \
-    --storage-location backup \
-    --include-namespaces $POSTGRESQL_NAMESPACE \
-    --selector app.kubernetes.io/instance=$POSTGRESQL_INSTANCE \
-    --snapshot-volumes \
-    --default-volumes-to-fs-backup
 }
 
 # 备份 minio 数据

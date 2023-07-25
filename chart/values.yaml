@@ -102,3 +102,12 @@ minioTLSSecret:
 minioPort: 80
 minioServiceIP: 10.0.0.18
 minioServicePort: 9000
+
+# [Velero]
+schedule: "0 2 * * *"
+includeNamespaces:
+  - production
+selector:
+  app.kubernetes.io/instance: postgresql
+storageLocation: ""
+ttl: "720h0m0s"
