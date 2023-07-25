@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "jet-chart.labels" . | nindent 4 }}
 spec:
-  schedule: {{ .Values.schedule }}
+  schedule: {{ .Values.backup.minioSchedule }}
   timeZone: "Asia/Shanghai"
   jobTemplate:
     spec:
@@ -22,10 +22,10 @@ spec:
           volumes:
             - name: data
               persistentVolumeClaim:
-                claimName: {{ .Values.minioDataPVC }}
+                claimName: {{ .Values.backup.minioDataPVC }}
             - name: backup
               persistentVolumeClaim:
-                claimName: {{ .Values.minioBackupPVC }}
+                claimName: {{ .Values.backup.minioBackupPVC }}
           containers:
           - name: {{ include "jet-chart.fullname" . }}-minio-backup
             image: alpine:3.18
@@ -35,8 +35,8 @@ spec:
             - -c
             args:
             - |
-              tar cf /backup/`date +%Y%m%d%H%M`-minio.tar.gz /data/{{ .Values.dataDir }};
-              find ~/backup -maxdepth 1 -type f -mtime +{{ .Values.expireDay }} -name '*.tar.gz' -exec  rm -rf {} \;
+              tar cf /backup/`date +%Y%m%d%H%M`-minio.tar.gz /data/{{ .Values.backup.dataDir }};
+              find ~/backup -maxdepth 1 -type f -mtime +{{ .Values.backup.expireDay }} -name '*.tar.gz' -exec  rm -rf {} \;
             volumeMounts:
               - name: data
                 readOnly: true

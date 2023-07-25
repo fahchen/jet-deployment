@@ -5,16 +5,16 @@ metadata:
   labels:
     {{- include "jet-chart.labels" . | nindent 4 }}
 spec:
-  schedule: {{ .Values.schedule }}
+  schedule: {{ .Values.backup.veleroSchedule }}
   template:
     defaultVolumesToFsBackup: true
     includedNamespaces:
-      {{- range .Values.includeNamespaces }}
+      {{- range .Values.backup.includeNamespaces }}
       - {{ . }}
       {{- end }}
     labelSelector:
       matchLabels:
-        {{- .Values.selector | toYaml | nindent 8 }}
-    storageLocation: {{ .Values.storageLocation }}
-    ttl: {{ .Values.ttl }}
+        {{- .Values.backup.selector | toYaml | nindent 8 }}
+    storageLocation: {{ .Values.backup.storageLocation }}
+    ttl: {{ .Values.backup.ttl }}
 

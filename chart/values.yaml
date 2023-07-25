@@ -105,23 +105,19 @@ minioPort: 80
 minioServiceIP: 10.0.0.18
 minioServicePort: 9000
 
-# [Backup Schedule]
-schedule: "0 2 * * *"
-
-# [Velero]
-includeNamespaces:
-  - production
-selector:
-  app.kubernetes.io/instance: postgresql
-storageLocation: ""
-ttl: "720h0m0s"
-
-# [Minio Backup]
-minioBackupVolumes:
-minioBackupVolumeMounts:
-sshKey:
-backupDir:
-dataDir:
-remoteUser:
-remoteIP:
-expireDay:
+# [Backup]
+backup:
+  # [Velero]
+  veleroSchedule: "0 1 * * *"
+  includeNamespaces:
+    - production
+  selector:
+    app.kubernetes.io/instance: postgresql
+  storageLocation: ""
+  ttl: "720h0m0s"
+  # [Minio Backup]
+  minioSchedule: "0 3 * * *"
+  minioDataPVC: "minio-data"
+  minioBackupPVC: "minio-backup"
+  minioDataDir: "*"
+  minioExpireDay: "30"
