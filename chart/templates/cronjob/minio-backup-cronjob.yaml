@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "jet-chart.fullname" . }}-minio-backup
+  labels:
+    {{- include "jet-chart.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.schedule }}
+  timeZone: "Asia/Shanghai"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: {{ .Values.minioDataPVC }}
+            - name: backup
+              persistentVolumeClaim:
+                claimName: {{ .Values.minioBackupPVC }}
+          containers:
+          - name: {{ include "jet-chart.fullname" . }}-minio-backup
+            image: alpine:3.18
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            args:
+            - |
+              tar cf /backup/`date +%Y%m%d%H%M`-minio.tar.gz /data/{{ .Values.dataDir }};
+              find ~/backup -maxdepth 1 -type f -mtime +{{ .Values.expireDay }} -name '*.tar.gz' -exec  rm -rf {} \;
+            volumeMounts:
+              - name: data
+                readOnly: true
+                mountPath: /data
+              - name: backup
+                mountPath: /backup
+          restartPolicy: OnFailure

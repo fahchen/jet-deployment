@@ -36,6 +36,8 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
+affinity: {}
+tolerations: {}
 
 # [Jet]
 jetSubpath: /
@@ -103,11 +105,23 @@ minioPort: 80
 minioServiceIP: 10.0.0.18
 minioServicePort: 9000
 
-# [Velero]
+# [Backup Schedule]
 schedule: "0 2 * * *"
+
+# [Velero]
 includeNamespaces:
   - production
 selector:
   app.kubernetes.io/instance: postgresql
 storageLocation: ""
 ttl: "720h0m0s"
+
+# [Minio Backup]
+minioBackupVolumes:
+minioBackupVolumeMounts:
+sshKey:
+backupDir:
+dataDir:
+remoteUser:
+remoteIP:
+expireDay:
