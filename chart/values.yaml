@@ -89,12 +89,14 @@ airbaseVolumesHostPath:
 # [PostgreSQL]
 postgresqlUser: postgres
 postgresqlPassword: postgres
-postgresqlIP: 10.0.0.18
-postgresqlPort: 5432
 postgresqlAirbaseDatabase: airbase_prod
 postgresqlAirbasePoolSize: 30
 postgresqlEventStoreDatabase: eventstore_prod
 postgresqlEventStorePoolSize: 60
+postgresqlService: postgresql
+postgresqlExternal: {}
+  # IP: 10.0.0.18
+  # port: 5432
 
 # [Minio]
 minioRootUser: minioadmin
@@ -104,8 +106,10 @@ minioHost: oss.jet.localhost
 minioSubpath: /
 minioTLSSecret:
 minioPort: 80
-minioServiceIP: 10.0.0.18
-minioServicePort: 9000
+minioService: minio
+minioExternal: {}
+  # IP: 10.0.0.18
+  # port: 9000
 
 # [Backup]
 backup: {}
