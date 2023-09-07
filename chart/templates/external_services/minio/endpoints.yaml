@@ -1,9 +1,11 @@
+{{- with .Values.minioExternal }}
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: {{ include "jet-chart.fullname" . }}-minio
+  name: {{ include "jet-chart.fullname" $ }}-minio
 subsets:
   - addresses:
-      - ip: {{ .Values.minioServiceIP }}
+      - ip: {{ .IP }}
     ports:
-      - port: {{ .Values.minioServicePort }}
+      - port: {{ .port }}
+{{- end }}

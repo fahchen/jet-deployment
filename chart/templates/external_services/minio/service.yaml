@@ -1,10 +1,12 @@
+{{- with .Values.minioExternal }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "jet-chart.fullname" . }}-minio
+  name: {{ include "jet-chart.fullname" $ }}-minio
   labels:
-    {{- include "jet-chart.labels" . | nindent 4 }}
+    {{- include "jet-chart.labels" $ | nindent 4 }}
 spec:
   ports:
     - port: 9000
-      targetPort: {{ .Values.minioServicePort }}
+      targetPort: {{ .port }}
+{{- end }}
