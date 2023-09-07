@@ -135,3 +135,18 @@ backup:
   # Set the expiration time for the Minio backups.
   minioExpireDay: "30"
 ```
+
+### backup operation guide
+- Create a backup from schedule
+```bash
+velero create backup $backup_name --from-schedule $schedule_name
+```
+- List backup
+```bash
+velero get backup
+```
+- View a backup detail
+```bash
+velero describe backups $backup_name --details
+```
+> $backup_name and $schedule_name fill in as actual
