@@ -1,0 +1,60 @@
+fullnameOverride: minio
+nameOverride: minio
+auth:
+  rootPassword: ********
+  rootUser: admin
+clientImage:
+  tag: 2023.5.4-debian-11-r1
+extraVolumeMounts: []
+extraVolumes: []
+image:
+  tag: 2023.5.4-debian-11-r1
+mode: standalone
+persistence:
+  enabled: true
+  mountPath: /data
+  existingClaim: data-minio
+podAnnotations:
+  prometheus.io/path: /minio/v2/metrics/cluster
+  prometheus.io/port: "9000"
+  prometheus.io/scrape: "true"
+provisioning:
+  extraCommands:
+  - mc anonymous set download provisioning/minio-public
+  enabled: true
+  policies:
+    - name: backup
+      statements:
+        - resources:
+            - "arn:aws:s3:::postgresql-backup/*"
+          actions:
+            - "s3:*"
+          effect: "Allow"
+    - name: jet
+      statements:
+        - resources:
+            - "arn:aws:s3:::minio-public/*"
+            - "arn:aws:s3:::minio-private/*"
+          actions:
+            - "s3:*"
+          effect: "Allow"
+  users:
+    - username: backup-man
+      password: ********
+      disable: false
+      policies:
+        - backup
+      setPolicies: true
+    - username: jet
+      password: ********
+      disable: false
+      policies:
+        - jet
+      setPolicies: true
+  buckets:
+    - name: postgresql-backup
+      region: minio
+    - name: minio-public
+      region: minio
+    - name: minio-private
+      region: minio
