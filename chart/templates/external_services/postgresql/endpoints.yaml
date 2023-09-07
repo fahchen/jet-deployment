@@ -1,9 +1,11 @@
+{{- with .Values.postgresqlExternal }}
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: {{ include "jet-chart.fullname" . }}-postgresql
+  name: {{ include "jet-chart.fullname" $ }}-postgresql
 subsets:
   - addresses:
-      - ip: {{ .Values.postgresqlIP}}
+      - ip: {{ .IP }}
     ports:
-      - port: {{ .Values.postgresqlPort }}
+      - port: {{ .port }}
+{{- end }}

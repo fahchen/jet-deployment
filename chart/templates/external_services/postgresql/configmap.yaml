@@ -5,7 +5,15 @@ metadata:
   labels:
     {{- include "jet-chart.labels" . | nindent 4 }}
 data:
+  {{- if .Values.postgresqlExternal }}
   JET_AIRBASE_DB_URL: ecto://{{ .Values.postgresqlUser }}:{{ .Values.postgresqlPassword }}@{{ include "jet-chart.fullname" . }}-postgresql:{{ .Values.postgresqlPort | int }}/{{ .Values.postgresqlAirbaseDatabase }}
+  {{- else }}
+  JET_AIRBASE_DB_URL: ecto://{{ .Values.postgresqlUser }}:{{ .Values.postgresqlPassword }}@{{ .Values.postgresqlService }}:{{ .Values.postgresqlPort | int }}/{{ .Values.postgresqlAirbaseDatabase }}
+  {{- end }}
   JET_AIRBASE_DB_POOL_SIZE: {{ .Values.postgresqlAirbasePoolSize | quote }}
+  {{- if .Values.postgresqlExternal }}
   JET_EVENT_STORE_DB_URL: ecto://{{ .Values.postgresqlUser }}:{{ .Values.postgresqlPassword }}@{{ include "jet-chart.fullname" . }}-postgresql:{{ .Values.postgresqlPort | int }}/{{ .Values.postgresqlEventStoreDatabase }}
+  {{- else }}
+  JET_EVENT_STORE_DB_URL: ecto://{{ .Values.postgresqlUser }}:{{ .Values.postgresqlPassword }}@{{ .Values.postgresqlService }}:{{ .Values.postgresqlPort | int }}/{{ .Values.postgresqlEventStoreDatabase }}
+  {{- end }}
   JET_EVENT_STORE_DB_POOL_SIZE: {{ .Values.postgresqlEventStorePoolSize | quote }}
