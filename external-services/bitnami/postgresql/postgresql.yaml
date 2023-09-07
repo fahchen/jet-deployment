@@ -1,0 +1,76 @@
+fullnameOverride: postgresql
+nameOverride: postgresql
+architecture: standalone
+auth:
+  enablePostgresUser: true
+  postgresPassword: ********
+common:
+  global:
+    postgresql:
+      auth:
+        database: postgres
+        postgresPassword: ********
+global:
+  postgresql:
+    auth:
+      database: postgres
+      postgresPassword: ********
+image:
+  tag: 14.8.0-debian-11-r13
+metrics:
+  enabled: true
+postgresqlDataDir: /bitnami/postgresql/data
+postgresqlSharedPreloadLibraries: pgaudit
+primary:
+  configuration: ""
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 70
+  extendedConfiguration: |
+    max_connections = 2000
+    shared_buffers = 14GB
+    effective_cache_size = 42GB
+    maintenance_work_mem = 2GB
+    checkpoint_completion_target = 0.9
+    wal_buffers = 16MB
+    default_statistics_target = 100
+    random_page_cost = 1.1
+    effective_io_concurrency = 200
+    work_mem = 1835kB
+    min_wal_size = 1GB
+    max_wal_size = 4GB
+    max_worker_processes = 28
+    max_parallel_workers_per_gather = 4
+    max_parallel_workers = 28
+    max_parallel_maintenance_workers = 4
+  initdb:
+    args: ""
+    password: ********
+    scripts:
+      init-db.sh: |
+        #!/bin/bash
+        set -e
+
+        psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "postgres" <<-EOSQL
+        CREATE DATABASE airbase_prod;
+        CREATE DATABASE eventstore_prod;
+        EOSQL
+    user: postgres
+  name: production
+  persistence:
+    enabled: true
+    mountPath: /bitnami/postgresql
+    existingClaim: data-postgresql
+  pgHbaConfiguration: |-
+    local   all             all                                     trust
+    host    all             all             127.0.0.1/32            trust
+    host    all             all             ::1/128                 trust
+    host    all             all             all                     scram-sha-256
+  podAntiAffinityPreset: soft
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+shmVolume:
+  enabled: true
+  sizeLimit: 10Gi
