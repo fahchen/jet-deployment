@@ -42,7 +42,11 @@ tolerations: {}
 # [Jet]
 jetSubpath: /
 jetHost: jet.localhost
-jetTLSSecret:
+jetTLS:
+  # jetTLSSecret:
+  #   certificate:
+  #   key:
+  # certResolver:
 
 # [Airbase]
 airbaseDeploymentID:
@@ -108,7 +112,11 @@ minioRootPassword: minioadmin
 minioScheme: http://
 minioHost: oss.jet.localhost
 minioSubpath: /
-minioTLSSecret:
+minioTLS:
+  # minioTLSSecret:
+  #   certificate:
+  #   key:
+  # certResolver:
 minioPort: 80
 minioService: minio
 minioExternal: {}

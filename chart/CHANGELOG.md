@@ -1,3 +1,8 @@
+### 0.4.0
+- Use exist external service in k8s cluster
+- support postgresql ssl connection
+- support `letsencrypt` TLS certificates
+
 ### 0.3.0
 - update `minio` to 2022 release
 - remove `scixir` from dependencies

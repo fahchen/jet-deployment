@@ -46,18 +46,35 @@ jetHost: supervision.jet.localhost
 minioHost: supervision.jet.localhost
 ```
 
-4. set IPs for external services
-```yaml
-# values.local.yaml
+4. set external services
 
-# Set IPs properly
+   - importing external services outside the k8s cluster
 
-# [PostgreSQL]
-postgresqlIP: 10.0.0.18
+     ```yaml
+     # values.local.yaml
 
-# [Minio]
-minioServiceIP: 10.0.0.18
-```
+     # [PostgreSQL]
+     postgresqlExternal:
+       IP: 10.0.0.18
+       port: 5432
+
+     # [Minio]
+     minioExternal:
+       IP: 10.0.0.18
+       port: 9000
+     ```
+
+   - using external services inside the k8s cluster
+
+     ```yaml
+     # values.local.yaml
+
+     # [PostgreSQL]
+     postgresqlService: postgresql
+
+     # [Minio]
+     minioService: minio
+     ```
 
 ## Commands
 ```bash
@@ -80,18 +97,30 @@ make install RELEASE=workflow
 ## HowTo
 
 ### Setup TLS
+- Use your own certificate Settings
 ```yaml
-# values.local.yaml
-
 # [Jet]
-jetTLSSecret:
-  certificate: base64 encoded certificate-file
-  key: base64 encoded key-file
+jetTLS:
+  jetTLSSecret:
+    certificate: base64 encoded certificate-file
+    key: base64 encoded key-file
 
 # [Minio]
-minioTLSSecret:
-  certificate: base64 encoded certificate-file
-  key: base64 encoded key-file
+minioTLS:
+  minioTLSSecret:
+    certificate: base64 encoded certificate-file
+    key: base64 encoded key-file
+```
+
+- Use letsencrypt certificate
+```yaml
+# [Jet]
+jetTLS:
+  certResolver: jet
+
+# [Minio]
+minioTLS:
+  certResolver: jet
 minioScheme: https://
 minioPort: 443
 ```
@@ -142,4 +171,4 @@ postgresqlSsl:
   enabled: true
   caSecretName: root-secret
 ```
-> [Usage](https://github.com/Byzanteam/jet-airbase/pull/1692)
+> [Use reference](https://github.com/Byzanteam/jet-airbase/pull/1692)

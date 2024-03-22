@@ -5,7 +5,7 @@
 {{/* Middlewares for web ingress-routes */}}
 {{- $webMiddlewares := list }}
 {{- $webMiddlewares = append $webMiddlewares "compress" }}
-{{- if .Values.minioTLSSecret | empty | not }}
+{{- if .Values.minioTLS | empty | not }}
 {{- $webMiddlewares = append $webMiddlewares "redirect-to-https" }}
 {{- end }}
 
@@ -25,8 +25,13 @@ spec:
     - match: {{ . }}
       kind: Rule
       services:
+        {{- if .Values.minioExternal }}
         - name: {{ include "jet-chart.fullname" $ }}-minio
           port: 9000
+        {{- else }}
+        - name: {{ .Values.minioService }}
+          port: 9000
+        {{- end }}
       middlewares:
         {{- range $webMiddlewares }}
         - name: {{ include "jet-chart.fullname" $ }}-{{ . }}
@@ -35,7 +40,7 @@ spec:
 
 ---
 
-{{- if .Values.minioTLSSecret | empty | not }}
+{{- if .Values.minioTLS | empty | not }}
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -48,13 +53,22 @@ spec:
     - match: {{ . }}
       kind: Rule
       services:
+        {{- if .Values.minioExternal }}
         - name: {{ include "jet-chart.fullname" $ }}-minio
           port: 9000
+        {{- else }}
+        - name: {{ .Values.minioService }}
+          port: 9000
+        {{- end }}
       middlewares:
         {{- range $websecureMiddlewares }}
         - name: {{ include "jet-chart.fullname" $ }}-{{ . }}
         {{- end}}
     {{- end }}
   tls:
-    secretName: {{ include "jet-chart.fullname" $ }}-mimio-tls-secret
+    {{- if .Values.minioTLS.certResolver }}
+    certResolver: {{ .Values.minioTLS.certResolver }}
+    {{- else if .Values.minioTLS.minioTLSSecret }}
+    secretName: {{ include "jet-chart.fullname" $ }}-jet-tls-secret
+    {{- end }}
 {{- end }}
