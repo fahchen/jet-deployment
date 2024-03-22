@@ -7,8 +7,13 @@ metadata:
 data:
   {{- if .Values.postgresqlExternal }}
   JET_AIRBASE_DB_URL: ecto://{{ .Values.postgresqlUser }}:{{ .Values.postgresqlPassword }}@{{ include "jet-chart.fullname" . }}-postgresql:{{ .Values.postgresqlPort | int }}/{{ .Values.postgresqlAirbaseDatabase }}
+  JET_AIRBASE_DB_HOSTNAME: {{ include "jet-chart.fullname" . }}-postgresql
   {{- else }}
   JET_AIRBASE_DB_URL: ecto://{{ .Values.postgresqlUser }}:{{ .Values.postgresqlPassword }}@{{ .Values.postgresqlService }}:{{ .Values.postgresqlPort | int }}/{{ .Values.postgresqlAirbaseDatabase }}
+  JET_AIRBASE_DB_HOSTNAME: {{ .Values.postgresqlService }}
+  {{- end }}
+  {{- if .Values.postgresqlSsl.enabled }}
+  JET_AIRBASE_DB_CACERTFILE: /app/cert/ca.crt
   {{- end }}
   JET_AIRBASE_DB_POOL_SIZE: {{ .Values.postgresqlAirbasePoolSize | quote }}
   {{- if .Values.postgresqlExternal }}

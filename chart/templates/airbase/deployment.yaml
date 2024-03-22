@@ -44,10 +44,15 @@ spec:
           resources:
             {{- toYaml .Values.airbase.resources | nindent 12 }}
 
-          {{- if $volumesHostPath | empty | not }}
           volumeMounts:
+          {{- if $volumesHostPath | empty | not }}
             - name: airbase-apps-storage
               mountPath: /data
+          {{- end }}
+          {{ - if .Values.postgresqlSsl.enabled }}
+            - name: airbase-db-ca-cert
+              mountPath: /app/cert
+              readOnly: true
           {{- end }}
 
       {{- with .Values.nodeSelector }}
@@ -55,10 +60,15 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
-      {{- if $volumesHostPath | empty | not }}
       volumes:
+      {{- if $volumesHostPath | empty | not }}
         - name: airbase-apps-storage
           hostPath:
             path: {{ $volumesHostPath }}
             type: DirectoryOrCreate
       {{- end -}}
+      {{ - if .Values.postgresqlSsl.enabled }}
+        - name: airbase-db-ca-cert
+          secret:
+            secretName: {{ .Values.postgresqlSsl.caSecretName }}
+      {{- end }}

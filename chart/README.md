@@ -135,3 +135,11 @@ backup:
   # Set the expiration time for the Minio backups.
   minioExpireDay: "30"
 ```
+
+### Setup postgresql ssl connection
+```yaml
+postgresqlSsl:
+  enabled: true
+  caSecretName: root-secret
+```
+> [Usage](https://github.com/Byzanteam/jet-airbase/pull/1692)

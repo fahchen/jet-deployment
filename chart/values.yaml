@@ -97,6 +97,10 @@ postgresqlService: postgresql
 postgresqlExternal: {}
   # IP: 10.0.0.18
   # port: 5432
+# postgresql ssl connection config
+postgresqlSsl:
+  enabled: false
+  caSecretName: ""
 
 # [Minio]
 minioRootUser: minioadmin
