@@ -45,10 +45,8 @@ spec:
             {{- toYaml .Values.airbase.resources | nindent 12 }}
 
           volumeMounts:
-          {{- if $volumesHostPath | empty | not }}
             - name: airbase-apps-storage
               mountPath: /data
-          {{- end }}
           {{ - if .Values.postgresqlSsl.enabled }}
             - name: airbase-db-ca-cert
               mountPath: /app/cert
@@ -61,11 +59,14 @@ spec:
       {{- end }}
 
       volumes:
-      {{- if $volumesHostPath | empty | not }}
         - name: airbase-apps-storage
+      {{- if $volumesHostPath | empty | not }}
           hostPath:
             path: {{ $volumesHostPath }}
             type: DirectoryOrCreate
+      {{- else }}
+          emptyDir:
+            sizeLimit: 500Mi
       {{- end -}}
       {{ - if .Values.postgresqlSsl.enabled }}
         - name: airbase-db-ca-cert
